@@ -1,0 +1,69 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Autenticacao2.API", "Autenticacao2\Autenticacao2.API.csproj", "{343F328D-6A05-47A1-9789-4FD4EF6FEF15}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0-Presentation", "0-Presentation", "{D5FA8B5D-C9B3-41D1-8FC8-BD00ED8FC953}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1-API", "1-API", "{D50D3502-28EB-4DB5-9BAE-90E51DCC2EC6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2-Application", "2-Application", "{C7481A77-1DC7-4EEC-AF62-5960B4829925}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3-Domain", "3-Domain", "{AD44750C-F668-460A-978C-11F5DBE9323E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4-Infra", "4-Infra", "{164D914C-98DD-4F82-9696-D6257C44FF3E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4.1-Data", "4.1-Data", "{34745932-CB6D-45DC-86A6-729AE8F69B09}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4.2-Security", "4.2-Security", "{11B78B05-B093-433D-9004-B8FC8F7E6B21}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Autenticacao2.Application", "Autenticacao2.Application\Autenticacao2.Application.csproj", "{28F060A6-ABE9-4192-81C8-C7067F53E703}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application2.Domain", "Application2.Domain\Application2.Domain.csproj", "{63B21BE2-DBF4-4208-8FA4-F5CEF79A0E7A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Autenticacao2.Infra.Data", "Autenticacao2.Infra.Data\Autenticacao2.Infra.Data.csproj", "{F5EED3B5-7411-4D86-A24C-50CE7CAD8232}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Autenticacao2.Infra.Security", "Autenticacao2.Infra.Security\Autenticacao2.Infra.Security.csproj", "{2F9E4153-4DC0-4EED-9C9C-2B23CD847AB4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{343F328D-6A05-47A1-9789-4FD4EF6FEF15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{343F328D-6A05-47A1-9789-4FD4EF6FEF15}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{343F328D-6A05-47A1-9789-4FD4EF6FEF15}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{343F328D-6A05-47A1-9789-4FD4EF6FEF15}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28F060A6-ABE9-4192-81C8-C7067F53E703}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28F060A6-ABE9-4192-81C8-C7067F53E703}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28F060A6-ABE9-4192-81C8-C7067F53E703}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28F060A6-ABE9-4192-81C8-C7067F53E703}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63B21BE2-DBF4-4208-8FA4-F5CEF79A0E7A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63B21BE2-DBF4-4208-8FA4-F5CEF79A0E7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63B21BE2-DBF4-4208-8FA4-F5CEF79A0E7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63B21BE2-DBF4-4208-8FA4-F5CEF79A0E7A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F5EED3B5-7411-4D86-A24C-50CE7CAD8232}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5EED3B5-7411-4D86-A24C-50CE7CAD8232}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5EED3B5-7411-4D86-A24C-50CE7CAD8232}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5EED3B5-7411-4D86-A24C-50CE7CAD8232}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F9E4153-4DC0-4EED-9C9C-2B23CD847AB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F9E4153-4DC0-4EED-9C9C-2B23CD847AB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F9E4153-4DC0-4EED-9C9C-2B23CD847AB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F9E4153-4DC0-4EED-9C9C-2B23CD847AB4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{343F328D-6A05-47A1-9789-4FD4EF6FEF15} = {D50D3502-28EB-4DB5-9BAE-90E51DCC2EC6}
+		{34745932-CB6D-45DC-86A6-729AE8F69B09} = {164D914C-98DD-4F82-9696-D6257C44FF3E}
+		{11B78B05-B093-433D-9004-B8FC8F7E6B21} = {164D914C-98DD-4F82-9696-D6257C44FF3E}
+		{28F060A6-ABE9-4192-81C8-C7067F53E703} = {C7481A77-1DC7-4EEC-AF62-5960B4829925}
+		{63B21BE2-DBF4-4208-8FA4-F5CEF79A0E7A} = {AD44750C-F668-460A-978C-11F5DBE9323E}
+		{F5EED3B5-7411-4D86-A24C-50CE7CAD8232} = {34745932-CB6D-45DC-86A6-729AE8F69B09}
+		{2F9E4153-4DC0-4EED-9C9C-2B23CD847AB4} = {11B78B05-B093-433D-9004-B8FC8F7E6B21}
+	EndGlobalSection
+EndGlobal

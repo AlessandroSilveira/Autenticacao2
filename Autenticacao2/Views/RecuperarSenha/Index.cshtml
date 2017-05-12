@@ -1,0 +1,49 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Recuperar Senha</h2>
+<h4>Insira seu email</h4>
+
+<table>
+	<tr>
+		<td>
+			E-mail:
+		</td>
+		<td>@Html.TextBox("Email")
+			<br/>
+		
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2"><input type="submit" id="request-button" value="Enviar" /></td>
+	</tr>
+	<div id="result-area"></div>
+</table>
+<script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+<script>
+        $(document).ready(function ()
+        {
+            $("#request-button").on('click', function ()
+            {
+            	var token = localStorage.getItem('jtoken');
+	            var email = $("#Email").val();
+
+                $.ajax({
+                	url: "http://localhost:53151/api/recoverpassword?Email=" + email,
+                    type: 'post'
+                  
+                })
+                .done(function (data)
+                {
+                    $("#result-area").append("<p>" + data + "</p>");
+                })
+                .error(function (error)
+                {
+                    $("#result-area").append("<p>Falha na requisição</p>");
+                });
+            });
+        });
+</script>
+

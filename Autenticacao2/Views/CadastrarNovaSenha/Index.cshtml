@@ -1,0 +1,58 @@
+﻿
+<h2>Cadastrar Nova Senha</h2>
+<h4>Informe a sua nova senha</h4>
+
+<table>
+	<tr>
+		<td>
+			Senha:
+		</td>
+		<td>
+			@Html.TextBox("Senha")
+			<br />
+
+		</td>
+	</tr>
+	<tr>
+		<td>
+			Confirmar Senha:
+		</td>
+		<td>
+			@Html.TextBox("Confirmar_Senha")
+			<br />
+			<input type="hidden" name="token" value="@ViewBag.Token"/>
+			<input type="hidden" name="id" value="@ViewBag.id" />
+		</td>
+	</tr>
+<tr>
+	<td colspan="2"><input type="submit" id="request-button" value="Enviar" /></td>
+</tr>
+<div id="result-area"></div>
+</table>
+<script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+<script>
+        $(document).ready(function ()
+        {
+          
+            $("#request-button").on('click', function ()
+            {
+            	var token = localStorage.getItem('jtoken');
+	            var senha = $("#Senha").val();
+
+                $.ajax({
+                	url: "http://localhost:53151/api/api/newpassword?token="+token+"&id="+id+"&senha="+senha+"",
+                    type: 'post'
+
+                })
+                .done(function (data)
+                {
+                    $("#result-area").append("<p>" + data + "</p>");
+                })
+                .error(function (error)
+                {
+                    $("#result-area").append("<p>Falha na requisição</p>");
+                });
+            });
+        });
+</script>
+

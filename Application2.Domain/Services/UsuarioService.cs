@@ -1,0 +1,164 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Web.Security;
+using Application2.Domain.Entities;
+using Application2.Domain.Interfaces.Repository;
+using Application2.Domain.Interfaces.Service;
+using RestSharp;
+
+namespace Application2.Domain.Services
+{
+	public class UsuarioService : IUsuarioService
+	{
+		private readonly IUsuarioRepository _usuarioRepository;
+		private readonly ICriptografia _criptografia;
+		private readonly IGerenciadorEmail _gerenciadorEmail;
+		private readonly IConfiguration _configuration;
+		private readonly IEnviadorEmail _enviadorEmail;
+
+		public UsuarioService(IUsuarioRepository usuarioRepository, ICriptografia criptografia, IGerenciadorEmail gerenciadorEmail, IConfiguration configuration, IEnviadorEmail enviadorEmail)
+		{
+			_usuarioRepository = usuarioRepository;
+			_criptografia = criptografia;
+			_gerenciadorEmail = gerenciadorEmail;
+			_configuration = configuration;
+			_enviadorEmail = enviadorEmail;
+		}
+
+		public void Dispose()
+		{
+			_usuarioRepository.Dispose();
+			GC.SuppressFinalize(this);
+		}
+
+		public Usuario Adicionar(Usuario obj)
+		{
+			return _usuarioRepository.Adicionar(obj);
+		}
+
+		public Usuario ObterPorId(Guid id)
+		{
+			return _usuarioRepository.ObterPorId(id);
+		}
+
+		public IEnumerable<Usuario> ObterTodos()
+		{
+			return _usuarioRepository.ObterTodos();
+		}
+
+		public Usuario Atualizar(Usuario obj)
+		{
+			return _usuarioRepository.Atualizar(obj);
+		}
+
+		public void Remover(Guid id)
+		{
+			_usuarioRepository.Remover(id);
+		}
+
+		public int SaveChanges()
+		{
+			return _usuarioRepository.SaveChanges();
+		}
+
+		public string ValidarToken(string token, string id)
+		{
+			var usuario = _usuarioRepository.ObterPorId(new Guid(id));
+			return ValidadorToken(usuario.Token, usuario, _configuration.ObterTempoLogado());
+		}
+
+		public string ValidadorToken(string token, Usuario usuario, int tempologado)
+		{
+			var retorno = "";
+
+			var verificadoNaoAutorizado = new VerificaNaoAutorizado();
+			var verificaSessaoInvalida = new VerificaSessaoInvalida();
+			var retornaValidacao = new RetornoValidacao();
+			verificadoNaoAutorizado.Proximo = verificaSessaoInvalida;
+			verificaSessaoInvalida.Proximo = retornaValidacao;
+
+			return verificadoNaoAutorizado.Validacao(token, usuario, retorno, tempologado);
+		}
+
+		public bool VerificarEmail(object email)
+		{
+			return _usuarioRepository.Get(f => f.Email.Equals(email)) != null;
+		}
+
+		public bool VerificarEmailESenha(string loginEmail, object hash)
+		{
+			return _usuarioRepository.Get(f => f.Email.Equals(loginEmail) && f.Senha.Equals(hash)) != null;
+		}
+
+		public bool Autenticar(string loginEmail, object hash)
+		{
+			var usuario = _usuarioRepository.Get(f => f.Email.Equals(loginEmail) && f.Senha.Equals(hash));
+			if (usuario == null) return false;
+			var token = AutalizarToken(usuario);
+			if (string.IsNullOrEmpty(token))
+				return false;
+			FormsAuthentication.SetAuthCookie(token, false);
+			return true;
+		}
+
+		public string AutalizarToken(Usuario usuario)
+		{
+			var token = ObterToken(usuario);
+			usuario.Token = token;
+			_usuarioRepository.Atualizar(usuario);
+			return token;
+		}
+
+		public string ObterToken(Usuario usuario)
+		{
+			var client = new RestClient("http://localhost:53151/");
+
+			var request = new RestRequest("api/security/token", Method.POST);
+			request.AddParameter("grant_type", "password");
+			
+
+			IRestResponse<TokenData> response = client.Execute<TokenData>(request);
+			var token = response.Data.AccessToken;
+
+			if (!String.IsNullOrEmpty(token))
+				FormsAuthentication.SetAuthCookie(token, false);
+			return token;
+		}
+
+		public Usuario Get(Func<Usuario, bool> func)
+		{
+			return _usuarioRepository.Get(func);
+		}
+
+		public Usuario EnviarToken(string loginEmail)
+		{
+			var usuario = _usuarioRepository.Get(f => f.Email.Equals(loginEmail));
+			usuario.Token = ObterToken(usuario);
+			var dadosEmail = _gerenciadorEmail.EnviarEmail(usuario, usuario.Token);
+			_usuarioRepository.Atualizar(usuario);
+			_enviadorEmail.EnviarTokenPorEmail(dadosEmail);
+			return usuario;
+		}
+
+		public bool NovaSenha(Usuario usuario)
+		{
+			try
+			{
+				var usuario2 = CriarSenhaHash(usuario.UsuarioId.ToString(), usuario.Senha);
+				_usuarioRepository.Atualizar(usuario2);
+				return true;
+			}
+			catch (Exception)
+			{
+				return false;
+			}
+		}
+
+		private Usuario CriarSenhaHash(string id, string senha)
+		{
+			var usuario = _usuarioRepository.ObterPorId(new Guid(id));
+			usuario.Senha = _criptografia.Hash(senha);
+			return usuario;
+		}
+	}
+}

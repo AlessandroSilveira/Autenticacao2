@@ -9,26 +9,25 @@ namespace Autenticacao2.Controllers
 	public class NewPasswordController : ApiController
 	{
 		private readonly IUsuarioService _usuarioService;
-		//private readonly ICustomMessage _customMessasge;
+		
 
 		public NewPasswordController(IUsuarioService usuarioService)
 		{
-			//_customMessasge = customMessasge;
+			
 			_usuarioService = usuarioService;
 		}
 		
 		[HttpPost]
+        [Authorize(Roles = "User")]
 		public IHttpActionResult NovaSenha(string token, string id, string senha)
 		{
 			var usuarioid = new Guid(id);
 			var usuario = _usuarioService.ObterPorId(usuarioid);
-			
 
-			if (token.Equals(usuario.Token))
-				return usuario == null
-					? (IHttpActionResult)CustomMessage.Create(HttpStatusCode.Unauthorized, "Usuário Invalido")
-					: Ok(_usuarioService.NovaSenha(usuario));
-			return CustomMessage.Create(HttpStatusCode.Unauthorized, "Token Invalido");
+
+		    return usuario == null ? Ok("Usuário Inválido") : Ok(_usuarioService.NovaSenha(usuario) ? "Senha Alterada com Sucesso" : "Erro ao alterar senha");
+
+			
 		}
 	}
 }

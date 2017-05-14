@@ -25,25 +25,45 @@
 <script>
         $(document).ready(function ()
         {
-            $("#request-button").on('click', function ()
-            {
-            	var token = localStorage.getItem('jtoken');
-	            var email = $("#Email").val();
+        var data = {
+	        grant_type: 'password'
+        }
+	       
+        $.ajax({
+			url: "http://localhost:53151/api/security/token",
+		        type: 'post',
+		        contentType: 'x-www-form-urlencoded',
+		        data: data
+	        })
+	        .done(function (data)
+	        {
+		        $("#request-button").on('click', function () {
+			        var token = data.access_token;
+			        var email = $("#Email").val();
 
-                $.ajax({
-                	url: "http://localhost:53151/api/recoverpassword?Email=" + email,
-                    type: 'post'
+			        $.ajax({
+					        url: "http://localhost:53151/api/recoverpassword?Email=" + email+"&token="+token+"",
+							type: 'post',
+					        contentType: 'application/json',
+					        headers: {
+						        "Authorization": "Bearer " + token
+					        }
                   
-                })
-                .done(function (data)
-                {
-                    $("#result-area").append("<p>" + data + "</p>");
-                })
-                .error(function (error)
-                {
-                    $("#result-area").append("<p>Falha na requisição</p>");
-                });
-            });
+				        })
+				        .done(function (data)
+				        {
+					        $("#result-area").append("<p>"+data+"</p>");
+				        })
+				        .error(function (error)
+				        {
+							$("#result-area").append("<p>" + error+"</p>");
+				        });
+		        });
+	        })
+	        .error(function (data)
+	        {
+		        $("#result-area").append("<p>Usuário ou senha inválidos</p>");
+			});
         });
 </script>
 

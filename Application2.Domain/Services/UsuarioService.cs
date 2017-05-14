@@ -130,10 +130,9 @@ namespace Application2.Domain.Services
 			return _usuarioRepository.Get(func);
 		}
 
-		public Usuario EnviarToken(string loginEmail)
+		public Usuario EnviarToken(string loginEmail,string token)
 		{
 			var usuario = _usuarioRepository.Get(f => f.Email.Equals(loginEmail));
-			usuario.Token = ObterToken(usuario);
 			var dadosEmail = _gerenciadorEmail.EnviarEmail(usuario, usuario.Token);
 			_usuarioRepository.Atualizar(usuario);
 			_enviadorEmail.EnviarTokenPorEmail(dadosEmail);

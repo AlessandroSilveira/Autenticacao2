@@ -8,7 +8,7 @@
 			Senha:
 		</td>
 		<td>
-			@Html.TextBox("Senha")
+			@Html.Password("Senha")
 			<br />
 
 		</td>
@@ -18,41 +18,83 @@
 			Confirmar Senha:
 		</td>
 		<td>
-			@Html.TextBox("Confirmar_Senha")
+			@Html.Password("Confirmar_Senha")
 			<br />
-			<input type="hidden" name="token" value="@ViewBag.Token"/>
-			<input type="hidden" name="id" value="@ViewBag.id" />
+			<input type="hidden" id="token" value="@ViewBag.Token" />
+			<input type="hidden" id="id" value="@ViewBag.id" />
 		</td>
 	</tr>
-<tr>
-	<td colspan="2"><input type="submit" id="request-button" value="Enviar" /></td>
-</tr>
-<div id="result-area"></div>
+	<tr>
+		<td colspan="2"><input type="submit" id="request-button" value="Enviar" /></td>
+	</tr>
+	<div id="result-area"></div>
 </table>
 <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
 <script>
-        $(document).ready(function ()
-        {
-          
-            $("#request-button").on('click', function ()
-            {
-            	var token = localStorage.getItem('jtoken');
-	            var senha = $("#Senha").val();
+	//    $(document).ready(function ()
+	//    {
 
-                $.ajax({
-                	url: "http://localhost:53151/api/api/newpassword?token="+token+"&id="+id+"&senha="+senha+"",
-                    type: 'post'
+	//        $("#request-button").on('click', function ()
+	//        {
+	//var token = $("#token").val();
+	//var senha = $("#Senha").val();
+	//         var id = $("#id").val();
 
-                })
-                .done(function (data)
-                {
-                    $("#result-area").append("<p>" + data + "</p>");
-                })
-                .error(function (error)
-                {
-                    $("#result-area").append("<p>Falha na requisição</p>");
-                });
-            });
-        });
+
+	//            $.ajax({
+	//            	url: "http://localhost:53151/api/newpassword?token="+token+"&id="+id+"&senha="+senha+"",
+	//                type: 'post'
+
+	//            })
+	//            .done(function (data)
+	//            {
+	//                $("#result-area").append("<p>" + data + "</p>");
+	//            })
+	//            .error(function (error)
+	//            {
+	//                $("#result-area").append("<p>Falha na requisição</p>");
+	//            });
+	//        });
+	//    });
+
+	$(document).ready(function () {
+		var data = {
+			grant_type: 'password'
+		}
+
+		$.ajax({
+			url: "http://localhost:53151/api/security/token",
+			type: 'post',
+			contentType: 'x-www-form-urlencoded',
+			data: data
+		})
+			.done(function (data) {
+				$("#request-button").on('click', function () {
+					var token = $("#token").val();
+					var senha = $("#Senha").val();
+					var id = $("#id").val();
+
+
+					$.ajax({
+						url: "http://localhost:53151/api/newpassword?token=" + token + "&id=" + id + "&senha=" + senha + "",
+						type: 'post',
+						contentType: 'application/json',
+						headers: {
+							"Authorization": "Bearer " + token
+						}
+
+					})
+						.done(function (data) {
+							$("#result-area").append("<p>" + data + "</p>");
+						})
+						.error(function (error) {
+							$("#result-area").append("<p>Falha na requisição</p>");
+						});
+				});
+			})
+			.error(function (data) {
+				$("#result-area").append("<p>Usuário ou senha inválidos</p>");
+			});
+	});
 </script>
 

@@ -9,26 +9,24 @@ namespace Autenticacao2.Controllers
 	public class RecoverPasswordController : ApiController
 	{
 		private readonly IUsuarioService _usuarioService;
-		//private readonly ICustomMessage _customMessasge;
+		
 
 		public RecoverPasswordController(IUsuarioService usuarioService)
 		{
-			//_customMessasge = customMessasge;
 			_usuarioService = usuarioService;
 		}
 
 		[HttpPost]
-	
-		public IHttpActionResult Index(string Email)
+        [Authorize(Roles = "User")]
+		public IHttpActionResult Index(string Email, string token)
 		{
-			var login = new Login()
+		    var login = new Login()
 			{
 				Email = Email
 			};
 
-			return _usuarioService.VerificarEmail(login.Email)
-			? Ok(_usuarioService.EnviarToken(login.Email)) as IHttpActionResult
-			: CustomMessage.Create(HttpStatusCode.Unauthorized, "Usuario ou senhas invalido");
+
+		    return _usuarioService.VerificarEmail(login.Email) ? Ok(_usuarioService.EnviarToken(login.Email,token) != null ? "Email enviado com sucesso" : "Usuario ou senhas invalido") : Ok( "Usuario ou senhas invalido");
 		}
 	}
 }

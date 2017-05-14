@@ -17,7 +17,7 @@ namespace Application2.Domain.Interfaces.Service
 		bool VerificarEmailESenha(string loginEmail, object hash);
 		bool Autenticar(string loginEmail, object hash);
 		Usuario Get(Func<Usuario,bool> func);
-		Usuario EnviarToken(string loginEmail);
+		Usuario EnviarToken(string loginEmail,string token);
 		bool NovaSenha(Usuario usuario);
 		string ObterToken(Usuario usuario);
 	}

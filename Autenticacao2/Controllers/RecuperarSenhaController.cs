@@ -7,7 +7,7 @@ namespace Autenticacao2.Controllers
         // GET: RecuperarSenha
         public ActionResult Index()
         {
-            return View();
+            return View("Index");
         }
     }
 }

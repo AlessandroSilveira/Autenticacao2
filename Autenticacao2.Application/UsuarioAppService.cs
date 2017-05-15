@@ -54,17 +54,17 @@ namespace Autenticacao2.Application
 			return _usuarioService.SaveChanges();
 		}
 
-		public bool VerificarEmail(object email)
+		public bool VerificarEmail(string email)
 		{
 			return _usuarioService.VerificarEmail(email);
 		}
 
-		public bool VerificarEmailESenha(string loginEmail, object hash)
+		public bool VerificarEmailESenha(string loginEmail, string hash)
 		{
 			return _usuarioService.VerificarEmailESenha(loginEmail, hash);
 		}
 
-		public object Autenticar(string loginEmail, object hash)
+		public object Autenticar(string loginEmail, string hash)
 		{
 			return _usuarioService.Autenticar(loginEmail, hash);
 		}

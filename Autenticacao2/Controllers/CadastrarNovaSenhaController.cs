@@ -5,10 +5,10 @@ namespace Autenticacao2.Controllers
 {
 	public class CadastrarNovaSenhaController : Controller
     {
-        public ActionResult Index([FromUri] string token)
-		{
-			ViewBag.token = Request.QueryString["token"];
-			ViewBag.id = Request.QueryString["id"];
+        public ActionResult Index([FromUri] string token, [FromUri]string id)
+        {
+	        ViewBag.token = token;
+	        ViewBag.id = id;
 			return View("Index");
         }
     }

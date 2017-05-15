@@ -39,8 +39,13 @@
 	        {
 	        	$("#request-button").on('click', function () {
 	        		$("#result-area").html("");
-			        var token = data.access_token;
-			        var email = $("#Email").val();
+	        		var email = $("#Email").val();
+	        		var token = data.access_token;
+
+	        		if (email === "" || email == null) {
+	        			$("#result-area").append("<p style='color:red'>E-mail inválido </p>");
+				        return false;
+			        }
 
 			        $.ajax({
 					        url: "http://localhost:53151/api/recoverpassword?Email=" + email+"&token="+token+"",
@@ -56,13 +61,14 @@
 				        })
 				        .error(function (error)
 				        {
-							$("#result-area").append("<p>" + error+"</p>");
+				        	$("#result-area").append("<p style='color:red'>" + error + "</p>");
 				        });
+			        return false;
 		        });
 	        })
-	        .error(function (data)
+	        .error(function ()
 	        {
-		        $("#result-area").append("<p>Usuário ou senha inválidos</p>");
+	        	$("#result-area").append("<p style='color:red'>Email inválidos</p>");
 			});
         });
 </script>

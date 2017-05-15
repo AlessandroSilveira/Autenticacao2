@@ -7,12 +7,12 @@ namespace Autenticacao2.Test
 	[TestFixture]
 	public class HomeControllerTest
 	{
-		private HomeController _homeController;
+		private CadastroNovaSenhaController _homeController;
 
 		[SetUp]
 		public void Setup()
 		{
-			_homeController = new HomeController();
+			_homeController = new CadastroNovaSenhaController();
 		}
 		
 

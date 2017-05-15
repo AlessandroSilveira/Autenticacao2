@@ -1,7 +1,4 @@
-﻿using System.Collections.Specialized;
-using System.Web;
-using System.Web.Mvc;
-using System.Web.Routing;
+﻿using System.Web.Mvc;
 using Autenticacao2.Controllers;
 using Moq;
 using NUnit.Framework;
@@ -9,43 +6,23 @@ using NUnit.Framework;
 namespace Autenticacao2.Test
 {
 	[TestFixture]
-	public class CadastroNovaSenhaTest
+	public class CadastroNovaSenhaControllerTest
 	{
-		private CadastrarNovaSenhaController _cadastrarNovaSenhaController;
-		private HttpContextBase rmContext;
-		private HttpRequestBase rmRequest;
-		private Mock<HttpContextBase> moqContext;
-		private Mock<HttpRequestBase> moqRequest;
-		private NameValueCollection formValues;
+		private CadastrarNovaSenhaController _cadastroController;
+
 		[SetUp]
 		public void Setup()
 		{
-			_cadastrarNovaSenhaController = new CadastrarNovaSenhaController();
-			moqContext = new Mock<HttpContextBase>();
-			moqRequest = new Mock<HttpRequestBase>();
-			moqContext.Setup(x => x.Request).Returns(moqRequest.Object);
-			formValues = new NameValueCollection
-			{
-				{ "token", "token" },
-				{ "id", "id" }
-			};
+			_cadastroController = new CadastrarNovaSenhaController();
 		}
 
 
-		//[Test]
-		//public void RecuperarTest()
-		//{
+		[Test]
+		public void IndexTest()
+		{
 
-		//	moqRequest.Setup(r => r.QueryString).Returns(formValues);
-		//	// Act
-		//	var queryString = moqContext.Object.Request.QueryString;
-		//	// Assert
-		//	Assert.IsNotNull(queryString);
-		//	Assert.AreEqual("token", queryString["token"]);
-		//	Assert.AreEqual("id", queryString["id"]);
-
-		//	var result = _cadastrarNovaSenhaController.Index() as ViewResult;
-		//	Assert.AreEqual("Index", result.ViewName);
-		//}
+			var result = _cadastroController.Index(It.IsAny<string>(),It.IsAny<string>()) as ViewResult;
+			Assert.AreEqual("Index", result.ViewName);
+		}
 	}
 }

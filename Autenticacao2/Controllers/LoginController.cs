@@ -19,7 +19,7 @@ namespace Autenticacao2.Controllers
 		[HttpPost]
 		public IHttpActionResult Autenticar(string Email, string Senha)
 		{
-			var login = new Login()
+			var login = new Login
 			{
 				Email = Email,
 				Senha = Senha
@@ -28,8 +28,8 @@ namespace Autenticacao2.Controllers
 			return _usuarioService.VerificarEmail(login.Email)
 				? (_usuarioService.VerificarEmailESenha(login.Email, _criptografia.Hash(login.Senha))
 					? (IHttpActionResult) Ok(_usuarioService.Autenticar(login.Email, _criptografia.Hash(login.Senha)))
-					:Ok("Usuário e/ou senha inválidos.")) as IHttpActionResult
-				:Ok("E-mail informado é inválido.") as IHttpActionResult;
+					:Ok("Usuário e/ou senha inválidos."))
+				:Ok("E-mail informado é inválido.");
 		}
 	}
 }

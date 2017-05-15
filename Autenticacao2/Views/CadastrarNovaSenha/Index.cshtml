@@ -47,10 +47,17 @@
 			.done(function (data) {
 				$("#request-button").on('click', function () {
 					$("#result-area").html("");
+					var senha1 = $("#Senha").val();
+					var confirmaSenha = $("#Confirmar_Senha").val();
+					if (senha1 !== confirmaSenha) {
+						$("#result-area").append("<p style='color:red'>Senhas não conferem</p>");
+						return false;
+					}
+
+					$("#result-area").html("");
 					var token = $("#token").val();
 					var senha = $("#Senha").val();
 					var id = $("#id").val();
-
 
 					$.ajax({
 						url: "http://localhost:53151/api/newpassword?token=" + token + "&id=" + id + "&senha=" + senha + "",
@@ -62,15 +69,15 @@
 
 					})
 						.done(function (data) {
-							$("#result-area").append("<p>" + data + "</p>");
+							$("#result-area").append("<p style='color:red'>" + data + "</p>");
 						})
 						.error(function (error) {
-							$("#result-area").append("<p>Falha na requisição</p>");
+							$("#result-area").append("<p style='color:red'>Falha na requisição</p>");
 						});
 				});
 			})
 			.error(function (data) {
-				$("#result-area").append("<p>Usuário ou senha inválidos</p>");
+				$("#result-area").append("<p style='color:red'>Usuário ou senha inválidos</p>");
 			});
 	});
 </script>

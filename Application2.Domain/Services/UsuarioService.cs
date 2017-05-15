@@ -64,33 +64,32 @@ namespace Application2.Domain.Services
 		public string ValidarToken(string token, string id)
 		{
 			var usuario = _usuarioRepository.ObterPorId(new Guid(id));
-			return ValidadorToken(usuario.Token, usuario, _configuration.ObterTempoLogado());
+			return ValidadorToken(token, usuario, _configuration.ObterTempoLogado());
 		}
 
 		public string ValidadorToken(string token, Usuario usuario, int tempologado)
 		{
 			var retorno = "";
-
 			var verificadoNaoAutorizado = new VerificaNaoAutorizado();
-			var verificaSessaoInvalida = new VerificaSessaoInvalida();
+			//var verificaSessaoInvalida = new VerificaSessaoInvalida();
 			var retornaValidacao = new RetornoValidacao();
-			verificadoNaoAutorizado.Proximo = verificaSessaoInvalida;
-			verificaSessaoInvalida.Proximo = retornaValidacao;
+			verificadoNaoAutorizado.Proximo = retornaValidacao;
+			//verificaSessaoInvalida.Proximo = retornaValidacao;
 
 			return verificadoNaoAutorizado.Validacao(token, usuario, retorno, tempologado);
 		}
 
-		public bool VerificarEmail(object email)
+		public bool VerificarEmail(string email)
 		{
 			return _usuarioRepository.Get(f => f.Email.Equals(email)) != null;
 		}
 
-		public bool VerificarEmailESenha(string loginEmail, object hash)
+		public bool VerificarEmailESenha(string loginEmail, string hash)
 		{
 			return _usuarioRepository.Get(f => f.Email.Equals(loginEmail) && f.Senha.Equals(hash)) != null;
 		}
 
-		public bool Autenticar(string loginEmail, object hash)
+		public bool Autenticar(string loginEmail, string hash)
 		{
 			var usuario = _usuarioRepository.Get(f => f.Email.Equals(loginEmail) && f.Senha.Equals(hash));
 			if (usuario == null) return false;
@@ -133,18 +132,19 @@ namespace Application2.Domain.Services
 		public Usuario EnviarToken(string loginEmail,string token)
 		{
 			var usuario = _usuarioRepository.Get(f => f.Email.Equals(loginEmail));
-			usuario.Token = token;
-			_usuarioRepository.Atualizar(usuario);
-			var dadosEmail = _gerenciadorEmail.EnviarEmail(usuario, usuario.Token);
+			//usuario.Token = token;
+			//_usuarioRepository.Atualizar(usuario);
+			var dadosEmail = _gerenciadorEmail.EnviarEmail(usuario, token);
 			_enviadorEmail.EnviarTokenPorEmail(dadosEmail);
 			return usuario;
 		}
 
-		public bool NovaSenha(Usuario usuario)
+		public bool NovaSenha(Usuario usuario,string token)
 		{
 			try
 			{
 				var usuario2 = CriarSenhaHash(usuario.UsuarioId.ToString(), usuario.Senha);
+				usuario2.Token = token;
 				_usuarioRepository.Atualizar(usuario2);
 				return true;
 			}

@@ -13,12 +13,13 @@ namespace Application2.Domain.Interfaces.Service
 		void Remover(Guid id);
 		int SaveChanges();
 		string ValidarToken(string token, string id);
-		bool VerificarEmail(object email);
-		bool VerificarEmailESenha(string loginEmail, object hash);
-		bool Autenticar(string loginEmail, object hash);
+		bool VerificarEmail(string email);
+		bool VerificarEmailESenha(string loginEmail, string hash);
+		bool Autenticar(string loginEmail, string hash);
 		Usuario Get(Func<Usuario,bool> func);
 		Usuario EnviarToken(string loginEmail,string token);
-		bool NovaSenha(Usuario usuario);
+		bool NovaSenha(Usuario usuario,string token);
 		string ObterToken(Usuario usuario);
+		string AutalizarToken(Usuario usuario);
 	}
 }

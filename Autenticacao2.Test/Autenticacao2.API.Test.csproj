@@ -102,7 +102,6 @@
     <Compile Include="RecoverPasswordControllerTest.cs" />
     <Compile Include="RecuperarSenhaControllerTest.cs" />
     <Compile Include="SingUpControllerTest.cs" />
-    <Compile Include="TestDomainService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -121,6 +120,9 @@
       <Project>{343F328D-6A05-47A1-9789-4FD4EF6FEF15}</Project>
       <Name>Autenticacao2.API</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Autentication2.Teste.API\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

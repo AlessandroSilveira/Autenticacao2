@@ -2,7 +2,7 @@
 
 namespace Autenticacao2.Controllers
 {
-	public class HomeController : Controller
+	public class CadastroNovaSenhaController : Controller
 	{
 		public ActionResult Index()
 		{

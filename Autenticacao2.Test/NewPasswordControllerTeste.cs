@@ -72,9 +72,13 @@ namespace Autenticacao2.Test
 				new Usuario(){UsuarioId = id3,Nome = "Ale3",Senha = "1234567890",Email = "teste3@teste.com",Token = "123",Telefones = new List<Telefone>()}
 			};
 
+			var usuario = usuarios.FirstOrDefault(a => a.UsuarioId == id);
+
 			_mockUsuarioService.Setup(mr => mr.ObterPorId(id)).Returns((Guid i) => usuarios.Single(x => x.UsuarioId == i));
-			
-			_mockUsuarioService.Setup(a=>a.NovaSenha(It.IsAny<Usuario>())).Returns(It.IsAny<bool>()).Verifiable();
+
+			_mockUsuarioService.Setup(a=>a.ValidarToken(token,id.ToString())).Returns(It.IsAny<string>()).Verifiable();
+
+			//_mockUsuarioService.Setup(a=>a.NovaSenha(usuario, token)).Returns(It.IsAny<bool>()).Verifiable();
 
 			////Act
 			_newPasswordController.NovaSenha(token, id.ToString(), senha);

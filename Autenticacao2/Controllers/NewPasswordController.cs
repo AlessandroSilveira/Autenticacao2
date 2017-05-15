@@ -21,7 +21,15 @@ namespace Autenticacao2.Controllers
 		{
 			var usuarioid = new Guid(id);
 			var usuario = _usuarioService.ObterPorId(usuarioid);
-		    return usuario == null ? Ok("Usuário Inválido") : Ok(_usuarioService.NovaSenha(usuario) ? "Senha Alterada com Sucesso" : "Erro ao alterar senha");
+
+			var validatoken = _usuarioService.ValidarToken(token, id);
+
+
+			return validatoken == ""
+				? (usuario == null
+					? Ok("Usuário Inválido")
+					: Ok(_usuarioService.NovaSenha(usuario,token) ? "Senha Alterada com Sucesso" : "Erro ao alterar senha"))
+				: Ok("Token Inválido");
 		}
 	}
 }

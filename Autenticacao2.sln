@@ -27,6 +27,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Autenticacao2.Infra.Data", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Autenticacao2.Infra.Security", "Autenticacao2.Infra.Security\Autenticacao2.Infra.Security.csproj", "{2F9E4153-4DC0-4EED-9C9C-2B23CD847AB4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Autenticacao2.Test", "Autenticacao2.Test\Autenticacao2.Test.csproj", "{3EF472BB-BD01-4A11-AC94-B1AA09477BFD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,6 +55,10 @@ Global
 		{2F9E4153-4DC0-4EED-9C9C-2B23CD847AB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2F9E4153-4DC0-4EED-9C9C-2B23CD847AB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2F9E4153-4DC0-4EED-9C9C-2B23CD847AB4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3EF472BB-BD01-4A11-AC94-B1AA09477BFD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3EF472BB-BD01-4A11-AC94-B1AA09477BFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3EF472BB-BD01-4A11-AC94-B1AA09477BFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3EF472BB-BD01-4A11-AC94-B1AA09477BFD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

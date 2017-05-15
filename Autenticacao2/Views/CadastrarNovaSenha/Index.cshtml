@@ -31,31 +31,7 @@
 </table>
 <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
 <script>
-	//    $(document).ready(function ()
-	//    {
 
-	//        $("#request-button").on('click', function ()
-	//        {
-	//var token = $("#token").val();
-	//var senha = $("#Senha").val();
-	//         var id = $("#id").val();
-
-
-	//            $.ajax({
-	//            	url: "http://localhost:53151/api/newpassword?token="+token+"&id="+id+"&senha="+senha+"",
-	//                type: 'post'
-
-	//            })
-	//            .done(function (data)
-	//            {
-	//                $("#result-area").append("<p>" + data + "</p>");
-	//            })
-	//            .error(function (error)
-	//            {
-	//                $("#result-area").append("<p>Falha na requisição</p>");
-	//            });
-	//        });
-	//    });
 
 	$(document).ready(function () {
 		var data = {
@@ -70,6 +46,7 @@
 		})
 			.done(function (data) {
 				$("#request-button").on('click', function () {
+					$("#result-area").html("");
 					var token = $("#token").val();
 					var senha = $("#Senha").val();
 					var id = $("#id").val();

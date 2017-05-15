@@ -15,7 +15,6 @@ namespace Autenticacao2.Test
 	{
 		private MockRepository _repository;
 		private Mock<IUsuarioService> _mockUsuarioService;
-		private Mock<ICustomMessage> _mockCustomMessage;
 		private Mock<IUsuarioRepository> _mockUsuarioRepository;
 		private ProfileController _profileController;
 
@@ -23,10 +22,9 @@ namespace Autenticacao2.Test
 		public void Setup()
 		{
 			_repository = new MockRepository(MockBehavior.Strict);
-			_mockCustomMessage = _repository.Create<ICustomMessage>();
 			_mockUsuarioService = _repository.Create<IUsuarioService>();
 			_mockUsuarioRepository = _repository.Create<IUsuarioRepository>();
-			_profileController = new ProfileController(_mockUsuarioService.Object, _mockCustomMessage.Object);
+			_profileController = new ProfileController(_mockUsuarioService.Object);
 		}
 
 		[Test]
@@ -50,22 +48,11 @@ namespace Autenticacao2.Test
 
 			_mockUsuarioService.Setup(a => a.Autenticar(It.IsAny<string>(), It.IsAny<string>())).Returns(It.IsAny<bool>()).Verifiable();
 
-			//_mockUsuarioRepository.Setup(a => a.ObterPorId(id)).Returns((Guid i) => usuarios.Single(x => x.UsuarioId == i));
-
 			//Act
 			_profileController.Get(id);
 
 			//Assert
 			_repository.VerifyAll();
 		}
-		[Test]
-		public void TestValidaToken()
-		{
-
-
-
-
-		}
-
 	}
 }

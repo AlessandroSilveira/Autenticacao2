@@ -32,20 +32,20 @@ namespace Autenticacao2.Test
 		}
 
 
-		[Test]
-		public void RecuperarTest()
-		{
+		//[Test]
+		//public void RecuperarTest()
+		//{
 
-			moqRequest.Setup(r => r.QueryString).Returns(formValues);
-			// Act
-			var queryString = moqContext.Object.Request.QueryString;
-			// Assert
-			Assert.IsNotNull(queryString);
-			Assert.AreEqual("token", queryString["token"]);
-			Assert.AreEqual("id", queryString["id"]);
+		//	moqRequest.Setup(r => r.QueryString).Returns(formValues);
+		//	// Act
+		//	var queryString = moqContext.Object.Request.QueryString;
+		//	// Assert
+		//	Assert.IsNotNull(queryString);
+		//	Assert.AreEqual("token", queryString["token"]);
+		//	Assert.AreEqual("id", queryString["id"]);
 
-			var result = _cadastrarNovaSenhaController.Index() as ViewResult;
-			Assert.AreEqual("Index", result.ViewName);
-		}
+		//	var result = _cadastrarNovaSenhaController.Index() as ViewResult;
+		//	Assert.AreEqual("Index", result.ViewName);
+		//}
 	}
 }

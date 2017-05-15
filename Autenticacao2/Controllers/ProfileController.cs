@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Net;
 using System.Web.Http;
 using Application2.Domain.Entities;
 using Application2.Domain.Interfaces.Service;
@@ -10,11 +9,9 @@ namespace Autenticacao2.Controllers
 	public class ProfileController : ApiController
 	{
 		private readonly IUsuarioService _usuarioService;
-		private readonly ICustomMessage _customMessasge;
 
-		public ProfileController(IUsuarioService usuarioService, ICustomMessage customMessasge)
+		public ProfileController(IUsuarioService usuarioService)
 		{
-			_customMessasge = customMessasge;
 			_usuarioService = usuarioService;
 		}
 
@@ -30,7 +27,7 @@ namespace Autenticacao2.Controllers
 		{
 			var retorno = _usuarioService.Autenticar(usuario.Email, usuario.Senha);
 			return retorno
-				? _customMessasge.Create(HttpStatusCode.Unauthorized, "Token  Inválido") as IHttpActionResult
+				? Ok("Token  Inválido") as IHttpActionResult
 				: Ok(_usuarioService.ObterPorId(id));
 		}
 	}

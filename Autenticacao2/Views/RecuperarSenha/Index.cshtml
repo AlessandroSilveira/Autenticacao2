@@ -37,7 +37,8 @@
 	        })
 	        .done(function (data)
 	        {
-		        $("#request-button").on('click', function () {
+	        	$("#request-button").on('click', function () {
+	        		$("#result-area").html("");
 			        var token = data.access_token;
 			        var email = $("#Email").val();
 
@@ -48,11 +49,10 @@
 					        headers: {
 						        "Authorization": "Bearer " + token
 					        }
-                  
 				        })
 				        .done(function (data)
 				        {
-					        $("#result-area").append("<p>"+data+"</p>");
+					        $("#result-area").append("<p style='color:red'>"+data+"</p>");
 				        })
 				        .error(function (error)
 				        {

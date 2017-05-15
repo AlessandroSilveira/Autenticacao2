@@ -9,7 +9,6 @@ namespace Autenticacao2.Controllers
 	public class RecoverPasswordController : ApiController
 	{
 		private readonly IUsuarioService _usuarioService;
-		
 
 		public RecoverPasswordController(IUsuarioService usuarioService)
 		{
@@ -24,8 +23,6 @@ namespace Autenticacao2.Controllers
 			{
 				Email = Email
 			};
-
-
 		    return _usuarioService.VerificarEmail(login.Email) ? Ok(_usuarioService.EnviarToken(login.Email,token) != null ? "Email enviado com sucesso" : "Usuario ou senhas invalido") : Ok( "Usuario ou senhas invalido");
 		}
 	}

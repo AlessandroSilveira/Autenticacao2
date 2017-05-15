@@ -1,5 +1,4 @@
-﻿using System.Net;
-using System.Web.Http;
+﻿using System.Web.Http;
 using Application2.Domain.Interfaces.Service;
 using Autenticacao.API.Models;
 
@@ -29,8 +28,8 @@ namespace Autenticacao2.Controllers
 			return _usuarioService.VerificarEmail(login.Email)
 				? (_usuarioService.VerificarEmailESenha(login.Email, _criptografia.Hash(login.Senha))
 					? (IHttpActionResult) Ok(_usuarioService.Autenticar(login.Email, _criptografia.Hash(login.Senha)))
-					: CustomMessage.Create(HttpStatusCode.Unauthorized, "Usuário e/ou senha inválidos."))
-				: CustomMessage.Create(HttpStatusCode.Unauthorized, "E-mail informado é inválido.");
+					:Ok("Usuário e/ou senha inválidos.")) as IHttpActionResult
+				:Ok("E-mail informado é inválido.") as IHttpActionResult;
 		}
 	}
 }

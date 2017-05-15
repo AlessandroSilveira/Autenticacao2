@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Net;
 using System.Web.Http;
 using Application2.Domain.Entities;
 using Application2.Domain.Interfaces.Service;
@@ -13,12 +12,10 @@ namespace Autenticacao2.Controllers
 		private readonly IUsuarioService _usuarioService;
 		private readonly IUnitOfWork _uokOfWork;
 		private readonly ICriptografia _criptografia;
-		//private readonly ICustomMessage _customMessasge;
 		private readonly IJwt _jwt;
 
 		public SignUpController(IUsuarioService usuarioService,  ICriptografia criptografia, IJwt jwt, IUnitOfWork uokOfWork)
 		{
-			//_customMessasge = customMessasge;
 			_criptografia = criptografia;
 			_jwt = jwt;
 			_uokOfWork = uokOfWork;
@@ -32,7 +29,7 @@ namespace Autenticacao2.Controllers
 			try
 			{
 				if (_usuarioService.VerificarEmail(usuario.Email))
-					return CustomMessage.Create(HttpStatusCode.Conflict, "E-mail já cadastrado.");
+					return Ok("E-mail já cadastrado.");
 
 				var novoUsuario = new Usuario(usuario.Nome, usuario.Email, _criptografia.Hash(usuario.Senha),
 					usuario.Telefones, _jwt.GenerateToken(usuario.Email));

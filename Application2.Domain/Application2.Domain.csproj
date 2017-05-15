@@ -89,6 +89,7 @@
     <Compile Include="Interfaces\Service\IGerenciadorEmail.cs" />
     <Compile Include="Interfaces\Service\IItensValidacao.cs" />
     <Compile Include="Interfaces\Service\IJwt.cs" />
+    <Compile Include="Interfaces\Service\IRestClient.cs" />
     <Compile Include="Interfaces\Service\ITelefoneService.cs" />
     <Compile Include="Interfaces\Service\IUsuarioService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -98,6 +99,7 @@
     <Compile Include="Services\EnviaEmailBuilder.cs" />
     <Compile Include="Services\EnviardorDeEmail.cs" />
     <Compile Include="Services\GerenciadorEmail.cs" />
+    <Compile Include="Services\RestClientDomain.cs" />
     <Compile Include="Services\RetornoValidacao.cs" />
     <Compile Include="Services\TelefoneService.cs" />
     <Compile Include="Services\TokenData.cs" />

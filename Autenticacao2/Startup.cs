@@ -64,6 +64,7 @@ namespace Autenticacao2
 			kernel.Bind<IGerenciadorEmail>().To<GerenciadorEmail>();
 			kernel.Bind<IHttpActionResult>().To<CustomMessage>();
 			kernel.Bind<IEnviadorEmail>().To<EnviardorDeEmail>();
+			kernel.Bind<IRestClientDomain>().To<RestClientDomain>();
 			kernel.Bind<IUnitOfWork>().To<UnitOfWork>();
 			kernel.Bind<HttpStatusCode>();
 			kernel.Bind<Func<IKernel>>().ToMethod(ctx => () => new Bootstrapper().Kernel);

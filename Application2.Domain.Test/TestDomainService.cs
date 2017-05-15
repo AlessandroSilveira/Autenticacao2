@@ -6,6 +6,7 @@ using Application2.Domain.Interfaces.Service;
 using Application2.Domain.Services;
 using Moq;
 using NUnit.Framework;
+using RestSharp;
 
 
 namespace Application2.Domain.Test
@@ -20,6 +21,7 @@ namespace Application2.Domain.Test
 		private Mock<IConfiguration> _mockConfiguration;
 		private Mock<IEnviadorEmail> _enviadoremailMock;
 		readonly Mock<IUsuarioService> _mockUsuarioService = new Mock<IUsuarioService>();
+		private Mock<IRestClientDomain> _restClientMock;
 		public IUsuarioService MockUsuarioServicey;
 		private UsuarioService _usuarioService;
 
@@ -32,8 +34,9 @@ namespace Application2.Domain.Test
 			_mockConfiguration = _repository.Create<IConfiguration>();
 			_mockGerenciadorEmail = _repository.Create<IGerenciadorEmail>();
 			_enviadoremailMock = _repository.Create<IEnviadorEmail>();
-			this.MockUsuarioServicey = _mockUsuarioService.Object;
-			_usuarioService = new UsuarioService(_mockUsuarioRepository.Object,_mockCriptografia.Object,_mockGerenciadorEmail.Object,_mockConfiguration.Object, _enviadoremailMock.Object);
+			_restClientMock = _repository.Create<IRestClientDomain>();
+		
+			_usuarioService = new UsuarioService(_mockUsuarioRepository.Object,_mockCriptografia.Object,_mockGerenciadorEmail.Object,_mockConfiguration.Object, _enviadoremailMock.Object, _restClientMock.Object);
 		}
 
 		[Test]
@@ -256,6 +259,7 @@ namespace Application2.Domain.Test
 			_mockUsuarioRepository.Setup(a => a.Get(It.IsAny<Func<Usuario, bool>>())).Returns(usuario).Verifiable();
 			_mockUsuarioService.Setup(a => a.AutalizarToken(usuario)).Returns(It.IsAny<string>()).Verifiable();
 			_mockUsuarioService.Setup(a => a.ObterToken(usuario)).Returns(It.IsAny<string>()).Verifiable();
+			_restClientMock.Setup(a=>a.NovaConexao()).Returns(It.IsAny<RestClient>()).Verifiable();
 
 			//Act
 			_usuarioService.Autenticar(usuario.Email, usuario.Senha);

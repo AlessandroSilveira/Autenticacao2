@@ -14,29 +14,29 @@ namespace Application2.Domain.Services
 		public string BodyFormat { get; set; }
 		public string Port { get; set; }
 
-		public void BuildFrom(string @from)
+		public void BuildFrom(string from)
 		{
-			this.From = from;
+			From = from;
 		}
 
 		public void BuildTo(string to)
 		{
-			this.To = to;
+			To = to;
 		}
 
 		public void BuildCc(string cc)
 		{
-			this.Cc = cc;
+			Cc = cc;
 		}
 
 		public void BuildBcc(string bcc)
 		{
-			this.Bcc = bcc;
+			Bcc = bcc;
 		}
 
 		public void BuildSubject(string subject)
 		{
-			this.Subject = subject;
+			Subject = subject;
 		}
 
 		public void BuildBody(string Body)
@@ -46,12 +46,12 @@ namespace Application2.Domain.Services
 
 		public void BuildSmtpServer(string smtpServer)
 		{
-			this.SmtpServer = smtpServer;
+			SmtpServer = smtpServer;
 		}
 
 		public void BuildPort(string port)
 		{
-			this.Port = port;
+			Port = port;
 		}
 
 		public IEmailBuilder GetEmail()

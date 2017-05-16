@@ -14,15 +14,15 @@
 
 		public Email(string from,string to, string cc, string bcc, string subject, string body, string smtpServer,string bodyFormat, string port )
 		{
-			this.Bcc = bcc;
-			this.Body = body;
-			this.BodyFormat = bodyFormat;
-			this.Cc = cc;
-			this.From = from;
-			this.SmtpServer = smtpServer;
-			this.Subject = subject;
-			this.To = to;
-			this.Port = port;
+			Bcc = bcc;
+			Body = body;
+			BodyFormat = bodyFormat;
+			Cc = cc;
+			From = from;
+			SmtpServer = smtpServer;
+			Subject = subject;
+			To = to;
+			Port = port;
 		}
 	}
 }

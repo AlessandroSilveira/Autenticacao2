@@ -4,15 +4,15 @@ namespace Application2.Domain.Services
 {
 	public class EmailBuilder : IEmailBuilder
 	{ 
-		public string From { get; set; }
-		public string To { get; set; }
-		public string Cc { get; set; }
-		public string Bcc { get; set; }
-		public string Subject { get; set; }
-		public string Body { get; set; }
-		public string SmtpServer { get; set; }
-		public string BodyFormat { get; set; }
-		public string Port { get; set; }
+		public string From { get; }
+		public string To { get; }
+		public string Cc { get;  }
+		public string Bcc { get;  }
+		public string Subject { get; }
+		public string Body { get;  }
+		public string SmtpServer { get; }
+		public string BodyFormat { get;  }
+		public string Port { get;  }
 
 		public string GetFrom()
 		{

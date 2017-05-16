@@ -28,7 +28,7 @@ namespace Autenticacao2.Controllers
 			return validatoken == ""
 				? (usuario == null
 					? Ok("Usuário Inválido")
-					: Ok(_usuarioService.NovaSenha(usuario,token) ? "Senha Alterada com Sucesso" : "Erro ao alterar senha"))
+					: Ok(_usuarioService.NovaSenha(usuario,token,senha) ? "Senha Alterada com Sucesso" : "Erro ao alterar senha"))
 				: Ok("Token Inválido");
 		}
 	}

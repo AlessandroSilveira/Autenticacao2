@@ -64,9 +64,9 @@ namespace Autenticacao2.Application
 			return _usuarioService.VerificarEmailESenha(loginEmail, hash);
 		}
 
-		public object Autenticar(string loginEmail, string hash)
+		public object Autenticar(string loginEmail, string hash,string token)
 		{
-			return _usuarioService.Autenticar(loginEmail, hash);
+			return _usuarioService.Autenticar(loginEmail, hash,token);
 		}
 
 		public string ValidarTokenDoUsuario(string token, string id)

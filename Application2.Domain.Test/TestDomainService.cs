@@ -136,18 +136,18 @@ namespace Application2.Domain.Test
 		//	_repository.VerifyAll();
 		//}
 
-		//[Test]
-		//public void ValidadorTokenTest()
-		//{
-		//	//Arrange
-		//	Guid id = new Guid("a566c99b-1ca7-48f9-a85e-68efd6ce2c2f");
-		//	var usuario = new Usuario(){UsuarioId = id,Nome = "Ale",Senha = "1234567890",Email = "teste4@teste.com",Token = "456",Telefones = new List<Telefone>()};
+		[Test]
+		public void ValidadorTokenTest()
+		{
+			//Arrange
+			Guid id = new Guid("a566c99b-1ca7-48f9-a85e-68efd6ce2c2f");
+			var usuario = new Usuario() { UsuarioId = id, Nome = "Ale", Senha = "1234567890", Email = "teste4@teste.com", Token = "456", Telefones = new List<Telefone>() };
 
-		//	//Act
-		//	_usuarioService.ValidadorToken(usuario.Token, usuario,30);
-		//	//Assert
-		//	_repository.VerifyAll();
-		//}
+			//Act
+			_usuarioService.ValidadorToken(usuario.Token, usuario, 30);
+			//Assert
+			_repository.VerifyAll();
+		}
 
 		//[Test]
 		//public void AtualizarTokenTeste()
@@ -158,7 +158,7 @@ namespace Application2.Domain.Test
 
 		//	_mockUsuarioService.Setup(a => a.ObterToken(usuario)).Returns(It.IsAny<string>()).Verifiable();
 		//	_restClientMock.Setup(a=>a.NovaConexao()).Returns(It.IsAny<RestClient>()).Verifiable();
-		
+
 		//	//Act
 		//	_usuarioService.AutalizarToken(usuario);
 		//	//Assert
@@ -171,14 +171,14 @@ namespace Application2.Domain.Test
 			//Arrange
 			Guid id = new Guid("a566c99b-1ca7-48f9-a85e-68efd6ce2c2f");
 			var usuario = new Usuario() { UsuarioId = id, Nome = "Ale", Senha = "1234567890", Email = "teste4@teste.com", Token = "456", Telefones = new List<Telefone>() };
-
-			_mockUsuarioService.Setup(a=>a.NovaSenha(usuario, usuario.Token)).Returns(It.IsAny<bool>()).Verifiable();
+			var senha = "123456";
+			_mockUsuarioService.Setup(a=>a.NovaSenha(usuario, usuario.Token,senha)).Returns(It.IsAny<bool>()).Verifiable();
 			_mockUsuarioRepository.Setup(a=>a.ObterPorId(usuario.UsuarioId)).Returns(usuario).Verifiable();
 			_mockCriptografia.Setup(a=>a.Hash(usuario.Senha)).Returns(It.IsAny<string>()).Verifiable();
 			_mockUsuarioRepository.Setup(a=>a.Atualizar(usuario)).Returns(usuario).Verifiable();
 
 			//Act
-			_usuarioService.NovaSenha(usuario,usuario.Token);
+			_usuarioService.NovaSenha(usuario,usuario.Token,senha);
 			//Assert
 			_repository.VerifyAll();
 		}
@@ -189,12 +189,12 @@ namespace Application2.Domain.Test
 			//Arrange
 			Guid id = new Guid("a566c99b-1ca7-48f9-a85e-68efd6ce2c2f");
 			var usuario = new Usuario() { UsuarioId = id, Nome = "Ale", Senha = "1234567890", Email = "teste4@teste.com", Token = "456", Telefones = new List<Telefone>() };
-
-			_mockUsuarioService.Setup(a => a.NovaSenha(usuario,usuario.Token)).Returns(It.IsAny<bool>()).Verifiable();
+			var senha = "123456";
+			_mockUsuarioService.Setup(a => a.NovaSenha(usuario,usuario.Token,senha)).Returns(It.IsAny<bool>()).Verifiable();
 			_mockUsuarioRepository.Setup(a => a.ObterPorId(usuario.UsuarioId)).Returns(usuario).Verifiable();
 
 			//Act
-			_usuarioService.NovaSenha(usuario,usuario.Token);
+			_usuarioService.NovaSenha(usuario,usuario.Token,senha);
 			//Assert
 			_repository.VerifyAll();
 		}

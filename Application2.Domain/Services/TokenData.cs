@@ -1,5 +1,8 @@
-﻿namespace Application2.Domain.Services
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace Application2.Domain.Services
 {
+	[ExcludeFromCodeCoverage]
 	public class TokenData
 	{
 		public string AccessToken { get; set; }

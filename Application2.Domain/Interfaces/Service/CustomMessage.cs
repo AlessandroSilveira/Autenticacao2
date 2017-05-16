@@ -7,11 +7,10 @@ using Newtonsoft.Json;
 
 namespace Application2.Domain.Interfaces.Service
 {
-	public class CustomMessage : ICustomMessage, IHttpActionResult
-
+	public class CustomMessage : IHttpActionResult , ICustomMessage
 	{
-		public HttpStatusCode StatusCode { get; }
-		public string Message { get; }
+		public HttpStatusCode StatusCode { get; private set; }
+		public string Message { get; private set; }
 
 		public CustomMessage(HttpStatusCode statusCode, string message)
 		{
@@ -19,7 +18,8 @@ namespace Application2.Domain.Interfaces.Service
 			Message = message;
 		}
 		
-		public static CustomMessage Create(HttpStatusCode statusCode, string message)
+
+		public CustomMessage Create(HttpStatusCode statusCode, string message)
 		{
 			return new CustomMessage(statusCode, message);
 		}
@@ -27,19 +27,12 @@ namespace Application2.Domain.Interfaces.Service
 		public Task<HttpResponseMessage> ExecuteAsync(CancellationToken cancellationToken)
 		{
 			var resp = new CustomMessage(StatusCode, Message);
-			var response = new HttpResponseMessage(StatusCode)
-			{
-				Content =
-					new StringContent(JsonConvert.SerializeObject(resp), System.Text.Encoding.UTF8, "application/json")
-			};
+				var response = new HttpResponseMessage(StatusCode)
+				{
+					Content =
+						new StringContent(JsonConvert.SerializeObject(resp), System.Text.Encoding.UTF8, "application/json")
+				};
 			return Task.FromResult(response);
 		}
-
-		CustomMessage ICustomMessage.Create(HttpStatusCode statusCode, string message)
-		{
-			return new CustomMessage(statusCode, message);
-		}
 	}
-
-
 }

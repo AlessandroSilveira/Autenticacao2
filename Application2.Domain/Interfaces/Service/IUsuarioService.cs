@@ -15,10 +15,10 @@ namespace Application2.Domain.Interfaces.Service
 		string ValidarToken(string token, string id);
 		bool VerificarEmail(string email);
 		bool VerificarEmailESenha(string loginEmail, string hash);
-		bool Autenticar(string loginEmail, string hash);
+		bool Autenticar(string loginEmail, string hash,string token);
 		Usuario Get(Func<Usuario,bool> func);
 		Usuario EnviarToken(string loginEmail,string token);
-		bool NovaSenha(Usuario usuario,string token);
+		bool NovaSenha(Usuario usuario,string token,string senha);
 		string ObterToken(Usuario usuario);
 		string AutalizarToken(Usuario usuario);
 	}

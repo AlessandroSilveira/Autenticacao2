@@ -105,7 +105,6 @@
     <Compile Include="Services\TokenData.cs" />
     <Compile Include="Services\UsuarioService.cs" />
     <Compile Include="Services\VerificaNaoAutorizado.cs" />
-    <Compile Include="Services\VerificaSessaoInvalida.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

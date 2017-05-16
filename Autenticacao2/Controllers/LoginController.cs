@@ -17,7 +17,7 @@ namespace Autenticacao2.Controllers
 
 		// POST: api/login
 		[HttpPost]
-		public IHttpActionResult Autenticar(string Email, string Senha)
+		public IHttpActionResult Autenticar(string Email, string Senha, string token)
 		{
 			var login = new Login
 			{
@@ -27,9 +27,12 @@ namespace Autenticacao2.Controllers
 
 			return _usuarioService.VerificarEmail(login.Email)
 				? (_usuarioService.VerificarEmailESenha(login.Email, _criptografia.Hash(login.Senha))
-					? (IHttpActionResult) Ok(_usuarioService.Autenticar(login.Email, _criptografia.Hash(login.Senha)))
-					:Ok("Usuário e/ou senha inválidos."))
-				:Ok("E-mail informado é inválido.");
+					? (_usuarioService.Autenticar(login.Email, _criptografia.Hash(login.Senha), token)
+						? Ok(_usuarioService.Get(f => f.Email.Equals(login.Email) && f.Senha.Equals(_criptografia.Hash(login.Senha)))) as IHttpActionResult
+						: Ok("E-mail informado é inválido.") as IHttpActionResult)
+					: Ok("E-mail informado é inválido.")) as IHttpActionResult
+				: Ok("E-mail informado é inválido.") as IHttpActionResult;
+
 		}
 	}
 }

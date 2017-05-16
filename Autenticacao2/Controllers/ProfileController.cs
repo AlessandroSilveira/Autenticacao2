@@ -16,19 +16,21 @@ namespace Autenticacao2.Controllers
 		}
 
 		// GET: api/Profile/5
+		[HttpPost]
 		public IHttpActionResult Get(Guid id)
 		{
 			var usuario = _usuarioService.ObterPorId(id);
-			var token = _usuarioService.ObterToken(usuario);
-			return ValidateToken(id, token, usuario);
+			//var token = _usuarioService.ObterToken(usuario);
+			return ValidateToken(id, usuario.Token, usuario);
 		}
 
 		public IHttpActionResult ValidateToken(Guid id, string token, Usuario usuario)
 		{
-			var retorno = _usuarioService.Autenticar(usuario.Email, usuario.Senha);
-			return retorno
-				? Ok("Token  Inválido") as IHttpActionResult
-				: Ok(_usuarioService.ObterPorId(id));
+			var retorno = _usuarioService.Autenticar(usuario.Email, usuario.Senha,token);
+			//return retorno
+			//	? Ok("Token  Inválido") as IHttpActionResult
+			//	: Ok(_usuarioService.ObterPorId(id));
+			return Ok(_usuarioService.ObterPorId(id));
 		}
 	}
 }

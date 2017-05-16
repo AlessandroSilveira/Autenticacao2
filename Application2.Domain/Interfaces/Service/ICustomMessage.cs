@@ -9,6 +9,6 @@ namespace Application2.Domain.Interfaces.Service
 	{
 		CustomMessage Create(HttpStatusCode statusCode, string message);
 	
-		Task<HttpResponseMessage> ExecuteAsync(CancellationToken cancellationToken);
+		
 	}
 }

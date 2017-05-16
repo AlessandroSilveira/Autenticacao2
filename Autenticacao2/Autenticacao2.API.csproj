@@ -267,7 +267,9 @@
     <Compile Include="Controllers\CadastrarNovaSenhaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\LogonController.cs" />
     <Compile Include="Controllers\NewPasswordController.cs" />
+    <Compile Include="Controllers\PerfilController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\RecoverPasswordController.cs" />
     <Compile Include="Controllers\RecuperarSenhaController.cs" />
@@ -348,6 +350,8 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\RecuperarSenha\Index.cshtml" />
     <Content Include="Views\CadastrarNovaSenha\Index.cshtml" />
+    <Content Include="Views\Logon\Index.cshtml" />
+    <Content Include="Views\Perfil\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Application2.Domain\Application2.Domain.csproj">

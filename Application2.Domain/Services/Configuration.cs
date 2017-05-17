@@ -30,5 +30,10 @@ namespace Autenticacao2.Domain.Services
 		{
 			return Convert.ToInt32(AppSettings["TempoLogado"]);
 		}
+
+		public string ObterPasswordEmail()
+		{
+			return AppSettings ["passwordEmail"];
+		}
 	}
 }

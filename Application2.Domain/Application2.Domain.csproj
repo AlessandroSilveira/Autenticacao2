@@ -98,6 +98,7 @@
     <Compile Include="Services\EmailBuilder.cs" />
     <Compile Include="Services\EnviaEmailBuilder.cs" />
     <Compile Include="Services\EnviardorDeEmail.cs" />
+    <Compile Include="Services\Estados.cs" />
     <Compile Include="Services\GerenciadorEmail.cs" />
     <Compile Include="Services\RestClientDomain.cs" />
     <Compile Include="Services\RetornoValidacao.cs" />

@@ -6,6 +6,13 @@ namespace Application2.Domain.Services
 {
 	public class EnviardorDeEmail : IEnviadorEmail
 	{
+		private readonly IConfiguration _configuration;
+
+		public EnviardorDeEmail(IConfiguration configuration)
+		{
+			_configuration = configuration;
+		}
+
 		public void EnviarTokenPorEmail(EnviaEmailBuilder dadosEmail)
 		{
 			using (
@@ -17,7 +24,7 @@ namespace Application2.Domain.Services
 				var client = new SmtpClient(dadosEmail.SmtpServer)
 				{
 					UseDefaultCredentials = false,
-					Credentials = new NetworkCredential("alesilver.si@gmail.com", "Alesilver224482"),
+					Credentials = new NetworkCredential(_configuration.ObterEmailFrom(), _configuration.ObterPasswordEmail()),
 					EnableSsl = true
 				};
 				client.Send(message);

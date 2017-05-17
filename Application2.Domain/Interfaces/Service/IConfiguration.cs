@@ -7,5 +7,6 @@
 		string ObterPortaServidorEmail();
 		string GetBodyEmailRecuperarSenha(string token,string id);
 		int ObterTempoLogado();
+		string ObterPasswordEmail();
 	}
 }

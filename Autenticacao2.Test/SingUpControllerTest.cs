@@ -35,23 +35,7 @@ namespace Autenticacao2.Test
 			_signUpController = new SignUpController(_mockUsuarioService.Object, _mockCriptografia.Object,_mockJwt.Object,_mockUow.Object);
 		}
 
-		[Test]
-		public void RegisterTestError()
-		{
-			//Arrange
-			Guid id = new Guid();
-			var usuario = new Usuario(){UsuarioId = id, Nome = "Ale",Senha = "1234567890",Email = "teste@teste.com",Token = "123",Telefones = new List<Telefone>()};
-			
-
-			_mockUsuarioService.Setup(a=>a.VerificarEmail(usuario.Email)).Returns(It.IsAny<bool>()).Verifiable();
-			
-			//Act
-			_signUpController.Registrar(usuario);
-
-			//Assert
-			_repository.VerifyAll();
-
-		}
+		
 
 		[Test]
 		public void RegisterTest()
@@ -60,7 +44,7 @@ namespace Autenticacao2.Test
 			Guid id = new Guid("e54684cc-fe03-4388-8cbe-87eb6b019b56");
 			var usuario = new Usuario(){UsuarioId = id, Nome = "Ale",Senha = "1234567890",Email = "teste2@teste.com",Token = "123",Telefones = new List<Telefone>(), DataUltimoLogin = DateTime.Now, DataAtualizacao = DateTime.Now,DataCriacao = DateTime.Now};
 			
-			_mockJwt.Setup(a=>a.GenerateToken(usuario.Email)).Returns(It.IsAny<string>()).Verifiable();
+			
 
 			_mockCriptografia.Setup(a=>a.Hash(usuario.Senha)).Returns(It.IsAny<string>()).Verifiable();
 
@@ -68,9 +52,12 @@ namespace Autenticacao2.Test
 
 			_mockUow.Setup(a=>a.BeginTransaction()).Verifiable();
 			
+			//_usuarioRepositoryMock.Setup(a=>a.Adicionar(usuario)).Returns(usuario).Verifiable();
+
+			//_mockUow.Setup(a=>a.Commit()).Verifiable();
 
 			//Act
-			_signUpController.Registrar(usuario);
+			_signUpController.Index(usuario.Token, usuario.Nome, usuario.Email,usuario.Senha, It.IsAny<string>(),It.IsAny<string>());
 		
 			//Assert
 			_repository.VerifyAll();

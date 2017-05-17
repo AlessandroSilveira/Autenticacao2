@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Web.Http;
 using Application2.Domain.Entities;
 using Application2.Domain.Interfaces.Service;
@@ -24,25 +25,36 @@ namespace Autenticacao2.Controllers
 
 		// POST: api/SignUp
 		[HttpPost]
-		public IHttpActionResult Registrar(Usuario usuario)
+		[Authorize(Roles = "User")]
+		public IHttpActionResult Index(string token,string nome,string email, string senha, string ddd,string telefone)
 		{
+
+			var usuario = new Usuario()
+			{
+				Nome = nome,
+				Email = email,
+				Senha = senha,
+				Token = token,
+				Telefones = new List<Telefone>()
+			};
+			
 			try
 			{
-				if (_usuarioService.VerificarEmail(usuario.Email))
+				if (_usuarioService.VerificarEmail(email))
 					return Ok("E-mail já cadastrado.");
 
 				var novoUsuario = new Usuario(usuario.Nome, usuario.Email, _criptografia.Hash(usuario.Senha),
-					usuario.Telefones, _jwt.GenerateToken(usuario.Email));
+					usuario.Telefones, usuario.Token);
 
 				_uokOfWork.BeginTransaction();
 				_usuarioService.Adicionar(novoUsuario);
 				_uokOfWork.Commit();
 
-				return Created("Usuario", novoUsuario);
+				return Ok("Usuário Criado com sucesso");
 			}
 			catch (Exception ex)
 			{
-				return InternalServerError(ex);
+				return Ok(ex);
 			}
 		}
 	}

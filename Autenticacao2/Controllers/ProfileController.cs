@@ -27,8 +27,8 @@ namespace Autenticacao2.Controllers
 		{
 			var retorno = _usuarioService.Autenticar(usuario.Email, usuario.Senha, token);
 			return retorno
-				? Ok("Token  Inválido") as IHttpActionResult
-				: Ok(_usuarioService.ObterPorId(id));
+				? Ok(_usuarioService.ObterPorId(id)) as IHttpActionResult
+				: Ok("Token  Inválido");
 		}
 	}
 }

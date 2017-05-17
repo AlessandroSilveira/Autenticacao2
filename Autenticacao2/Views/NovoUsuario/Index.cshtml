@@ -4,11 +4,8 @@
 }
 
 <h2>Novo Usuário</h2>
-
-@using (Html.BeginForm()) 
-{
-    @Html.AntiForgeryToken()
-    
+<div id="result-area"></div>
+	<input type="hidden" value="" id="token" />
     <div class="form-horizontal">
         <h4>Usuário</h4>
         <hr />
@@ -54,12 +51,10 @@
 		</div>
 	    <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Salvar" class="btn btn-default" />
+                <input type="button" value="Salvar" id="request-button" class="btn btn-default" />
             </div>
         </div>
     </div>
-}
-<div id="result-area"></div>
 
 <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
 <script>
@@ -75,30 +70,63 @@
 			data: data
 		})
 			.done(function (data) {
+				$("#token").html(data.access_token);
 				$("#request-button").on('click', function () {
 					$("#result-area").html("");
+					var nome = $("#Nome").val();
+					var email = $("#Email").val();
+					var senha = $("#Senha").val();
+					var confirmaSenha = $("#ConfirmaSenha").val();
+					var ddd = $("#Ddd").val();
+					var telefone = $("#Numero").val();
+					
 
+					if (nome === "") {
+						$("#result-area").append("<p style='color:red'>O campo Nome deve ser preenchido</p>");
+						return false;
+					}
 
+					if (email === "") {
+						$("#result-area").append("<p style='color:red'>O campo E-mail deve ser preenchido</p>");
+						return false;
+					}
+
+					if (senha === "") {
+						$("#result-area").append("<p style='color:red'>O campo Senha deve ser preenchido</p>");
+						return false;
+					}
+					if (confirmaSenha === "") {
+						$("#result-area").append("<p style='color:red'>O campo Confirmar Senha deve ser preenchido</p>");
+						return false;
+					}
+
+					if (senha !== confirmaSenha) {
+						$("#result-area").append("<p style='color:red'>Senhas não conferem</p>");
+						return false;
+					}
 
 					$.ajax({
-						url: "http://localhost:53151/api/newpassword?token=" + token + "&id=" + id + "&senha=" + senha + "",
+						url: "http://localhost:53151/api/signup?token=" + data.access_token + "&nome=" + nome + "&email=" + email + "&senha=" + senha + "&ddd=" + ddd + "&telefone=" + telefone + "",
 						type: 'post',
 						contentType: 'application/json',
 						headers: {
-							"Authorization": "Bearer " + token
+							"Authorization": "Bearer " + data.access_token
 						}
 
 					})
-						.done(function (data) {
-							$("#result-area").append("<p style='color:red'>" + data + "</p>");
+						.done(function (result) {
+							$("#result-area").append("<p style='color:red'>" + result + "</p>");
 						})
 						.error(function (error) {
 							$("#result-area").append("<p style='color:red'>Falha na requisição</p>");
 						});
+					return false;
 				});
 			})
 			.error(function (data) {
 				$("#result-area").append("<p style='color:red'>Usuário ou senha inválidos</p>");
 			});
+
+		
 	});
 </script>

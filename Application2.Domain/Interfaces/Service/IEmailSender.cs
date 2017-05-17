@@ -10,7 +10,6 @@
 		void BuildBody(string Body);
 		void BuildSmtpServer(string smtpServer);
 		void BuildPort(string port);
-
 		IEmailBuilder GetEmail();
 	}
 }

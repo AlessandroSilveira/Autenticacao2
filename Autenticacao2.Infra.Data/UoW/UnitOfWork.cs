@@ -1,10 +1,10 @@
 ﻿using System;
-using Autenticacao2.Infra.Data.Interfaces;
 using Autenticacao2.Infra.Data.Context;
+using Autenticacao2.Infra.Data.Interfaces;
 
 namespace Autenticacao2.Infra.Data.UoW
 {
-	public class UnitOfWork :IUnitOfWork
+	public class UnitOfWork : IUnitOfWork
 	{
 		private readonly AutenticacaoContext _db;
 		private bool _disposed;
@@ -25,25 +25,18 @@ namespace Autenticacao2.Infra.Data.UoW
 			_db.SaveChanges();
 		}
 
-
 		protected virtual void Dispose(bool disposing)
 		{
 			if (!_disposed)
-			{
 				if (disposing)
-				{
 					_db.Dispose();
-				}
-			}
 			_disposed = true;
 		}
-
 
 		public void Dispose()
 		{
 			Dispose(true);
 			GC.SuppressFinalize(this);
 		}
-
 	}
 }

@@ -24,7 +24,7 @@ namespace Autenticacao2.Application
 		public Usuario Adicionar(Usuario obj)
 		{
 			BeginTansaction();
-			var objreturn =  _usuarioService.Adicionar(obj);
+			var objreturn = _usuarioService.Adicionar(obj);
 			Commit();
 			return objreturn;
 		}
@@ -64,9 +64,9 @@ namespace Autenticacao2.Application
 			return _usuarioService.VerificarEmailESenha(loginEmail, hash);
 		}
 
-		public object Autenticar(string loginEmail, string hash,string token)
+		public object Autenticar(string loginEmail, string hash, string token)
 		{
-			return _usuarioService.Autenticar(loginEmail, hash,token);
+			return _usuarioService.Autenticar(loginEmail, hash, token);
 		}
 
 		public string ValidarTokenDoUsuario(string token, string id)

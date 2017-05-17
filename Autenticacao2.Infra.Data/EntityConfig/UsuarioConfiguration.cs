@@ -13,16 +13,13 @@ namespace Autenticacao2.Infra.Data.EntityConfig
 				.IsRequired()
 				.HasMaxLength(150);
 
-
 			Property(c => c.Email)
 				.IsRequired()
 				.HasMaxLength(150);
 
-
 			Property(c => c.Senha)
-			   .IsRequired()
-			   .HasMaxLength(250);
-
+				.IsRequired()
+				.HasMaxLength(250);
 
 			Property(c => c.Token)
 				.IsRequired()
@@ -30,6 +27,5 @@ namespace Autenticacao2.Infra.Data.EntityConfig
 
 			ToTable("Usuarios");
 		}
-		
 	}
 }

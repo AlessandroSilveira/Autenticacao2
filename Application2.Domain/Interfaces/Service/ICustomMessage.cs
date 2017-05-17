@@ -8,7 +8,5 @@ namespace Application2.Domain.Interfaces.Service
 	public interface ICustomMessage
 	{
 		CustomMessage Create(HttpStatusCode statusCode, string message);
-	
-		
 	}
 }

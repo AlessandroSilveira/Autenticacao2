@@ -28,11 +28,12 @@ namespace Autenticacao2.Test
 			//Arrange
 			var Senha = "1234567890";
 			var Email = "teste@teste.com";
+			var token = "123";
 			
 			_mockUsuarioService.Setup(a=>a.VerificarEmail(Email)).Returns(It.IsAny<bool>()).Verifiable();
 
 			//Act
-			_loginController.Autenticar(Email,Senha);
+			_loginController.Autenticar(Email,Senha,token);
 
 			//Assert
 			_repository.VerifyAll();

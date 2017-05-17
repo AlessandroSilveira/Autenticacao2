@@ -19,10 +19,8 @@ namespace Application2.Domain.Test
 		private Mock<IUsuarioRepository> _mockUsuarioRepository;
 		private Mock<ICriptografia> _mockCriptografia;
 		private Mock<IGerenciadorEmail> _mockGerenciadorEmail;
-		private Mock<IConfiguration> _mockConfiguration;
 		private Mock<IEnviadorEmail> _enviadoremailMock;
 		readonly Mock<IUsuarioService> _mockUsuarioService = new Mock<IUsuarioService>();
-		private Mock<IRestClientDomain> _restClientMock;
 		public IUsuarioService MockUsuarioServicey;
 		private UsuarioService _usuarioService;
 	
@@ -33,12 +31,9 @@ namespace Application2.Domain.Test
 			_repository = new MockRepository(MockBehavior.Strict);
 			_mockCriptografia = _repository.Create<ICriptografia>();
 			_mockUsuarioRepository = _repository.Create<IUsuarioRepository>();
-			_mockConfiguration = _repository.Create<IConfiguration>();
 			_mockGerenciadorEmail = _repository.Create<IGerenciadorEmail>();
 			_enviadoremailMock = _repository.Create<IEnviadorEmail>();
-			_restClientMock = _repository.Create<IRestClientDomain>();
-			var mockClient = new Mock<RestClient>();
-			_usuarioService = new UsuarioService(_mockUsuarioRepository.Object,_mockCriptografia.Object,_mockGerenciadorEmail.Object,_mockConfiguration.Object, _enviadoremailMock.Object, _restClientMock.Object);
+			_usuarioService = new UsuarioService(_mockUsuarioRepository.Object,_mockCriptografia.Object,_mockGerenciadorEmail.Object, _enviadoremailMock.Object);
 		}
 
 		[Test]
@@ -144,7 +139,7 @@ namespace Application2.Domain.Test
 			var usuario = new Usuario() { UsuarioId = id, Nome = "Ale", Senha = "1234567890", Email = "teste4@teste.com", Token = "456", Telefones = new List<Telefone>() };
 
 			//Act
-			_usuarioService.ValidadorToken(usuario.Token, usuario, 30);
+			_usuarioService.ValidadorToken(usuario.Token, usuario);
 			//Assert
 			_repository.VerifyAll();
 		}
@@ -174,8 +169,8 @@ namespace Application2.Domain.Test
 			var senha = "123456";
 			_mockUsuarioService.Setup(a=>a.NovaSenha(usuario, usuario.Token,senha)).Returns(It.IsAny<bool>()).Verifiable();
 			_mockUsuarioRepository.Setup(a=>a.ObterPorId(usuario.UsuarioId)).Returns(usuario).Verifiable();
-			_mockCriptografia.Setup(a=>a.Hash(usuario.Senha)).Returns(It.IsAny<string>()).Verifiable();
-			_mockUsuarioRepository.Setup(a=>a.Atualizar(usuario)).Returns(usuario).Verifiable();
+			//_mockCriptografia.Setup(a=>a.Hash(usuario.Senha)).Returns(It.IsAny<string>()).Verifiable();
+			//_mockUsuarioRepository.Setup(a=>a.Atualizar(usuario)).Returns(usuario).Verifiable();
 
 			//Act
 			_usuarioService.NovaSenha(usuario,usuario.Token,senha);

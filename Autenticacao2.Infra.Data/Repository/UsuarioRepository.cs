@@ -9,6 +9,5 @@ namespace Autenticacao2.Infra.Data.Repository
 		public UsuarioRepository(AutenticacaoContext db) : base(db)
 		{
 		}
-
 	}
 }

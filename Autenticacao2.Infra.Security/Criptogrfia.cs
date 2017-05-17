@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Security.Cryptography;
 using System.Text;
 using Application2.Domain.Interfaces.Service;
 
@@ -10,7 +11,7 @@ namespace Autenticacao2.Infra.Security
 		{
 			var bytes = new UTF8Encoding().GetBytes(senha);
 			byte[] hashBytes;
-			using (var algorithm = new System.Security.Cryptography.SHA512Managed())
+			using (var algorithm = new SHA512Managed())
 			{
 				hashBytes = algorithm.ComputeHash(bytes);
 			}

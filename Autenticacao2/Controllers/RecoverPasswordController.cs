@@ -1,5 +1,4 @@
-﻿using System.Net;
-using System.Web.Http;
+﻿using System.Web.Http;
 using Application2.Domain.Interfaces.Service;
 using Autenticacao.API.Models;
 
@@ -16,14 +15,18 @@ namespace Autenticacao2.Controllers
 		}
 
 		[HttpPost]
-        [Authorize(Roles = "User")]
+		[Authorize(Roles = "User")]
 		public IHttpActionResult Index(string Email, string token)
 		{
-		    var login = new Login()
+			var login = new Login
 			{
 				Email = Email
 			};
-		    return _usuarioService.VerificarEmail(login.Email) ? Ok(_usuarioService.EnviarToken(login.Email,token) != null ? "Email enviado com sucesso" : "Usuario ou senhas invalido") : Ok( "Usuario ou senhas invalido");
+			return _usuarioService.VerificarEmail(login.Email)
+				? Ok(_usuarioService.EnviarToken(login.Email, token) != null
+					? "Email enviado com sucesso"
+					: "Usuario ou senhas invalido")
+				: Ok("Usuario ou senhas invalido");
 		}
 	}
 }

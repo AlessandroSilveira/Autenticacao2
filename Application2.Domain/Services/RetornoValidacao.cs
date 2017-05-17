@@ -5,7 +5,7 @@ namespace Application2.Domain.Services
 {
 	public class RetornoValidacao : IItensValidacao
 	{
-		public string Validacao(string token, Usuario usuario, string retorno, int tempologado)
+		public string Validacao(string token, Usuario usuario, string retorno)
 		{
 			return retorno;
 		}

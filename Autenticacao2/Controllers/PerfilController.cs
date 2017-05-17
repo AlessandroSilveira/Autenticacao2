@@ -8,7 +8,7 @@ namespace Autenticacao2.Controllers
 	    public ActionResult Index(Guid id)
 	    {
 		    ViewBag.id = id;
-		    return View();
+		    return View("Index");
 	    }
     }
 }

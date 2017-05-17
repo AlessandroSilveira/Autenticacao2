@@ -1,0 +1,104 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Novo Usuário</h2>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Usuário</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.Label("Nome", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.Editor("Nome", new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessage("Nome", "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+	    <div class="form-group">
+		    @Html.Label("E-mail", htmlAttributes: new { @class = "control-label col-md-2" })
+		    <div class="col-md-10">
+			    @Html.Editor("Email", new { htmlAttributes = new { @class = "form-control" } })
+			    @Html.ValidationMessage("Email", "", new { @class = "text-danger" })
+		    </div>
+	    </div>
+		
+		<div class="form-group">
+			@Html.Label("Telefone", htmlAttributes: new { @class = "control-label col-md-2" })
+			<div class="col-md-10">
+				@Html.TextBox("Ddd",null, new {maxlength = 2}) - @Html.TextBox("Numero",null,new { maxlength = 9 })
+				@Html.ValidationMessage("Ddd", "", new { @class = "text-danger" }) @Html.ValidationMessage("Numero", "", new { @class = "text-danger" })
+			</div>
+		</div>
+
+	    <div class="form-group">
+            @Html.Label("Senha", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.Password("Senha","", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessage("Senha", "", new { @class = "text-danger" })
+            </div>
+        </div>
+		
+		<div class="form-group">
+			@Html.Label("Confirmar Senha", htmlAttributes: new { @class = "control-label col-md-2" })
+			<div class="col-md-10">
+				@Html.Password("ConfirmaSenha","", htmlAttributes: new { @class = "form-control" })
+				@Html.ValidationMessage("ConfirmaSenha", "", new { @class = "text-danger" })
+			</div>
+		</div>
+	    <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Salvar" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+<div id="result-area"></div>
+
+<script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+<script>
+	$(document).ready(function () {
+		var data = {
+			grant_type: 'password'
+		}
+
+		$.ajax({
+			url: "http://localhost:53151/api/security/token",
+			type: 'post',
+			contentType: 'x-www-form-urlencoded',
+			data: data
+		})
+			.done(function (data) {
+				$("#request-button").on('click', function () {
+					$("#result-area").html("");
+
+
+
+					$.ajax({
+						url: "http://localhost:53151/api/newpassword?token=" + token + "&id=" + id + "&senha=" + senha + "",
+						type: 'post',
+						contentType: 'application/json',
+						headers: {
+							"Authorization": "Bearer " + token
+						}
+
+					})
+						.done(function (data) {
+							$("#result-area").append("<p style='color:red'>" + data + "</p>");
+						})
+						.error(function (error) {
+							$("#result-area").append("<p style='color:red'>Falha na requisição</p>");
+						});
+				});
+			})
+			.error(function (data) {
+				$("#result-area").append("<p style='color:red'>Usuário ou senha inválidos</p>");
+			});
+	});
+</script>

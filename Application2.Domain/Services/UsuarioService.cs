@@ -4,7 +4,6 @@ using System.Web.Security;
 using Application2.Domain.Entities;
 using Application2.Domain.Interfaces.Repository;
 using Application2.Domain.Interfaces.Service;
-using RestSharp;
 
 namespace Application2.Domain.Services
 {
@@ -13,18 +12,15 @@ namespace Application2.Domain.Services
 		private readonly IUsuarioRepository _usuarioRepository;
 		private readonly ICriptografia _criptografia;
 		private readonly IGerenciadorEmail _gerenciadorEmail;
-		private readonly IConfiguration _configuration;
 		private readonly IEnviadorEmail _enviadorEmail;
-		private readonly IRestClientDomain _restClientDomain;
 
-		public UsuarioService(IUsuarioRepository usuarioRepository, ICriptografia criptografia, IGerenciadorEmail gerenciadorEmail, IConfiguration configuration, IEnviadorEmail enviadorEmail, IRestClientDomain restClientDomain)
+		public UsuarioService(IUsuarioRepository usuarioRepository, ICriptografia criptografia,
+			IGerenciadorEmail gerenciadorEmail, IEnviadorEmail enviadorEmail)
 		{
 			_usuarioRepository = usuarioRepository;
 			_criptografia = criptografia;
 			_gerenciadorEmail = gerenciadorEmail;
-			_configuration = configuration;
 			_enviadorEmail = enviadorEmail;
-			_restClientDomain = restClientDomain;
 		}
 
 		public void Dispose()
@@ -66,16 +62,16 @@ namespace Application2.Domain.Services
 		public string ValidarToken(string token, string id)
 		{
 			var usuario = _usuarioRepository.ObterPorId(new Guid(id));
-			return ValidadorToken(token, usuario, _configuration.ObterTempoLogado());
+			return ValidadorToken(token, usuario);
 		}
 
-		public string ValidadorToken(string token, Usuario usuario, int tempologado)
+		public string ValidadorToken(string token, Usuario usuario)
 		{
 			var retorno = "";
 			var verificadoNaoAutorizado = new VerificaNaoAutorizado();
 			var retornaValidacao = new RetornoValidacao();
 			verificadoNaoAutorizado.Proximo = retornaValidacao;
-			return verificadoNaoAutorizado.Validacao(token, usuario, retorno, tempologado);
+			return verificadoNaoAutorizado.Validacao(token, usuario, retorno);
 		}
 
 		public bool VerificarEmail(string email)
@@ -88,7 +84,7 @@ namespace Application2.Domain.Services
 			return _usuarioRepository.Get(f => f.Email.Equals(loginEmail) && f.Senha.Equals(hash)) != null;
 		}
 
-		public bool Autenticar(string loginEmail, string hash,string token)
+		public bool Autenticar(string loginEmail, string hash, string token)
 		{
 			var usuario = _usuarioRepository.Get(f => f.Email.Equals(loginEmail) && f.Senha.Equals(hash));
 			if (usuario == null) return false;
@@ -106,26 +102,12 @@ namespace Application2.Domain.Services
 			return usuario.Token;
 		}
 
-		public string ObterToken(Usuario usuario)
-		{
-			//var client = new RestClient("http://localhost:53151/");
-			var client = _restClientDomain.NovaConexao();
-			var request = new RestRequest("api/security/token", Method.POST);
-			request.AddParameter("grant_type", "password");
-			IRestResponse<TokenData> response = client.Execute<TokenData>(request);
-			var token = response.Data.AccessToken;
-
-			if (!string.IsNullOrEmpty(token))
-				FormsAuthentication.SetAuthCookie(token, false);
-			return token;
-		}
-
 		public Usuario Get(Func<Usuario, bool> func)
 		{
 			return _usuarioRepository.Get(func);
 		}
 
-		public Usuario EnviarToken(string loginEmail,string token)
+		public Usuario EnviarToken(string loginEmail, string token)
 		{
 			var usuario = _usuarioRepository.Get(f => f.Email.Equals(loginEmail));
 			var dadosEmail = _gerenciadorEmail.EnviarEmail(usuario, token);
@@ -133,11 +115,11 @@ namespace Application2.Domain.Services
 			return usuario;
 		}
 
-		public bool NovaSenha(Usuario usuario,string token,string senha)
+		public bool NovaSenha(Usuario usuario, string token, string senha)
 		{
 			try
 			{
-				var usuario2 = CriarSenhaHash(usuario.UsuarioId.ToString(),senha);
+				var usuario2 = CriarSenhaHash(usuario.UsuarioId.ToString(), senha);
 				usuario2.Token = token;
 				_usuarioRepository.Atualizar(usuario2);
 				return true;

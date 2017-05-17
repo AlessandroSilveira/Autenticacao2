@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Application2.Domain.Entities;
-using Application2.Domain.Interfaces.Repository;
 using Application2.Domain.Interfaces.Service;
 using Autenticacao2.Controllers;
 using Moq;
@@ -15,7 +14,6 @@ namespace Autenticacao2.Test
 	{
 		private MockRepository _repository;
 		private Mock<IUsuarioService> _mockUsuarioService;
-		private Mock<IUsuarioRepository> _mockUsuarioRepository;
 		private ProfileController _profileController;
 
 		[SetUp]
@@ -23,7 +21,6 @@ namespace Autenticacao2.Test
 		{
 			_repository = new MockRepository(MockBehavior.Strict);
 			_mockUsuarioService = _repository.Create<IUsuarioService>();
-			_mockUsuarioRepository = _repository.Create<IUsuarioRepository>();
 			_profileController = new ProfileController(_mockUsuarioService.Object);
 		}
 
@@ -43,10 +40,7 @@ namespace Autenticacao2.Test
 			};
 
 			_mockUsuarioService.Setup(a => a.ObterPorId(id)).Returns((Guid i) => usuarios.Single(x => x.UsuarioId == i));
-
-			_mockUsuarioService.Setup(a => a.ObterToken(It.IsAny<Usuario>())).Returns(It.IsAny<string>()).Verifiable();
-
-			_mockUsuarioService.Setup(a => a.Autenticar(It.IsAny<string>(), It.IsAny<string>())).Returns(It.IsAny<bool>()).Verifiable();
+			_mockUsuarioService.Setup(a => a.Autenticar(It.IsAny<string>(), It.IsAny<string>(),It.IsAny<string>())).Returns(It.IsAny<bool>()).Verifiable();
 
 			//Act
 			_profileController.Get(id);

@@ -19,7 +19,6 @@ namespace Application2.Domain.Interfaces.Service
 		Usuario Get(Func<Usuario,bool> func);
 		Usuario EnviarToken(string loginEmail,string token);
 		bool NovaSenha(Usuario usuario,string token,string senha);
-		string ObterToken(Usuario usuario);
 		string AutalizarToken(Usuario usuario);
 	}
 }

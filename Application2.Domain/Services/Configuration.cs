@@ -6,11 +6,6 @@ namespace Autenticacao2.Domain.Services
 {
 	public class Configuration : IConfiguration
 	{
-		public int ObterTempoLogado()
-		{
-			return Convert.ToInt32(AppSettings["tempoLogado"]);
-		}
-
 		public string ObterSmtp()
 		{
 			return AppSettings["host"];
@@ -29,6 +24,11 @@ namespace Autenticacao2.Domain.Services
 		public string GetBodyEmailRecuperarSenha(string token,string id)
 		{
 			return "Link para alteração de senha http://localhost:53151/CadastrarNovaSenha?token=" + token+ "&id="+id;
+		}
+
+		public int ObterTempoLogado()
+		{
+			return Convert.ToInt32(AppSettings["TempoLogado"]);
 		}
 	}
 }

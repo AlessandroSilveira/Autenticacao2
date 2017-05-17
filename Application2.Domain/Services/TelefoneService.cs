@@ -28,7 +28,7 @@ namespace Application2.Domain.Services
 
 		public Telefone ObterPorId(Guid id)
 		{
-		return	_telefoneRepository.ObterPorId(id);
+			return _telefoneRepository.ObterPorId(id);
 		}
 
 		public IEnumerable<Telefone> ObterTodos()
@@ -48,7 +48,7 @@ namespace Application2.Domain.Services
 
 		public int SaveChanges()
 		{
-			return  _telefoneRepository.SaveChanges();
+			return _telefoneRepository.SaveChanges();
 		}
 	}
 }

@@ -96,7 +96,10 @@
     <Compile Include="CadastroNovaSenhaTest.cs" />
     <Compile Include="HomeControllerTest.cs" />
     <Compile Include="LoginControllerTestes.cs" />
+    <Compile Include="LogonControllerTest.cs" />
     <Compile Include="NewPasswordControllerTeste.cs" />
+    <Compile Include="NovoUsuarioControllerTest.cs" />
+    <Compile Include="PerfilControllerTest.cs" />
     <Compile Include="ProfileControllerTestes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RecoverPasswordControllerTest.cs" />

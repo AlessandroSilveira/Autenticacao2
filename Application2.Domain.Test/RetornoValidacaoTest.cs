@@ -32,7 +32,7 @@ namespace Application2.Domain.Test
 			var usuario = new Usuario() { UsuarioId = id, Nome = "Ale", Senha = "1234567890", Email = "teste4@teste.com", Token = "456", Telefones = new List<Telefone>() };
 		
 			//Act
-			_retornoValidacao.Validacao(usuario.Token, usuario, It.IsAny<string>(), It.IsAny<int>());
+			_retornoValidacao.Validacao(usuario.Token, usuario, It.IsAny<string>());
 
 			//Arrange
 			_repository.VerifyAll();

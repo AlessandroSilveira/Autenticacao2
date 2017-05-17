@@ -20,7 +20,7 @@
 		<td>
 			@Html.Password("Senha")
 			<br />
-			
+
 		</td>
 	</tr>
 	<tr>
@@ -38,14 +38,14 @@
 		}
 
 		$.ajax({
-				url: "http://localhost:53151/api/security/token",
-				type: 'post',
-				contentType: 'x-www-form-urlencoded',
-				data: data
-			})
-			.done(function(data) {
+			url: "http://localhost:53151/api/security/token",
+			type: 'post',
+			contentType: 'x-www-form-urlencoded',
+			data: data
+		})
+			.done(function (data) {
 				$("#request-button").on('click',
-					function() {
+					function () {
 						$("#result-area").html("");
 						var email = $("#Email").val();
 						var senha = $("#Senha").val();
@@ -62,26 +62,22 @@
 
 						$("#result-area").html("");
 						$.ajax({
-								url: "http://localhost:53151/api/login?Email=" + email + "&Senha=" + senha + "&token=" + token + "",
-								type: 'post',
-								contentType: 'application/json',
-								headers: {
-									"Authorization": "Bearer " + token
-								}
+							url: "http://localhost:53151/api/login?Email=" + email + "&Senha=" + senha + "&token=" + token + "",
+							type: 'post',
+							contentType: 'application/json',
+							headers: {
+								"Authorization": "Bearer " + token
+							}
 
-							})
-							.done(function(result) {
-								
+						})
+							.done(function (result) {
+
 								window.location.href = "http://localhost:53151/Perfil/Index?id=" + result.usuarioId;
 							});
-						//.error(function (error) {
-						//	$("#result-area").append("<p style='color:red'>Falha na requisição</p>");
-						//});
+
 					});
 			});
-		//.error(function (data) {
-		//	$("#result-area").append("<p style='color:red'>Usuário ou senha inválidos</p>");
-		//});
+
 	});
 </script>
 

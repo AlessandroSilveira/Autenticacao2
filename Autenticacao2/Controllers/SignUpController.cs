@@ -14,7 +14,7 @@ namespace Autenticacao2.Controllers
 		private readonly ICriptografia _criptografia;
 		private readonly IJwt _jwt;
 
-		public SignUpController(IUsuarioService usuarioService,  ICriptografia criptografia, IJwt jwt, IUnitOfWork uokOfWork)
+		public SignUpController(IUsuarioService usuarioService, ICriptografia criptografia, IJwt jwt, IUnitOfWork uokOfWork)
 		{
 			_criptografia = criptografia;
 			_jwt = jwt;

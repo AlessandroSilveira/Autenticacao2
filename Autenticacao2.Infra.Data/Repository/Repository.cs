@@ -7,7 +7,7 @@ using Autenticacao2.Infra.Data.Context;
 
 namespace Autenticacao2.Infra.Data.Repository
 {
-	public class Repository<TEntity>: IRepository<TEntity> where TEntity : class
+	public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
 	{
 		protected AutenticacaoContext Db;
 		protected DbSet<TEntity> DbSet;
@@ -26,7 +26,7 @@ namespace Autenticacao2.Infra.Data.Repository
 
 		public TEntity Adicionar(TEntity obj)
 		{
-			var objReturn =  DbSet.Add(obj);
+			var objReturn = DbSet.Add(obj);
 			SaveChanges();
 			return objReturn;
 		}
@@ -53,13 +53,13 @@ namespace Autenticacao2.Infra.Data.Repository
 		public void Remover(Guid id)
 		{
 			DbSet.Remove(ObterPorId(id));
-			
 		}
 
 		public TEntity Get(Func<TEntity, bool> expr)
 		{
 			return DbSet.FirstOrDefault(expr);
 		}
+
 		public int SaveChanges()
 		{
 			return Db.SaveChanges();

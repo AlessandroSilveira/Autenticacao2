@@ -5,22 +5,22 @@ using NUnit.Framework;
 namespace Autenticacao2.Test
 {
 	[TestFixture]
-	public class HomeControllerTest
+	public class LogonControllerTest
 	{
-		private HomeController _homeController;
+		private LogonController _logonController;
 
 		[SetUp]
 		public void Setup()
 		{
-			_homeController = new HomeController();
+			_logonController = new LogonController();
 		}
-		
+
 
 		[Test]
 		public void HomeTest()
 		{
 
-			var result = _homeController.Index() as ViewResult;
+			var result = _logonController.Index() as ViewResult;
 			Assert.AreEqual("Index", result.ViewName);
 		}
 	}

@@ -10,7 +10,7 @@ namespace Application2.Domain.Entities
 			UsuarioId = new Guid();
 		}
 
-		public Usuario(string nome, string email, string senha, ICollection<Telefone> telefones, string token)
+		public Usuario(string nome, string email, string senha, List<Telefone> telefones, string token)
 		{
 			Nome = nome;
 			Email = email;
@@ -34,7 +34,7 @@ namespace Application2.Domain.Entities
 		public DateTime DataUltimoLogin { get;  set; }
 		public string Token { get;  set; }
 
-		public virtual ICollection<Telefone> Telefones { get; set; } = new List<Telefone>();
+		public virtual List<Telefone> Telefones { get; set; } 
 
 		public void AtualizarDataUltimoLogin()
 		{

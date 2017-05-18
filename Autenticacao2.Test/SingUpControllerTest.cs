@@ -32,7 +32,7 @@ namespace Autenticacao2.Test
 			_mockCriptografia = _repository.Create<ICriptografia>();
 			_mockJwt = _repository.Create<IJwt>();
 			_usuarioRepositoryMock = _repository.Create<IUsuarioRepository>();
-			_signUpController = new SignUpController(_mockUsuarioService.Object, _mockCriptografia.Object,_mockJwt.Object,_mockUow.Object);
+			_signUpController = new SignUpController(_mockUsuarioService.Object, _mockCriptografia.Object,_mockUow.Object);
 		}
 
 		
@@ -57,7 +57,7 @@ namespace Autenticacao2.Test
 			//_mockUow.Setup(a=>a.Commit()).Verifiable();
 
 			//Act
-			_signUpController.Index(usuario.Token, usuario.Nome, usuario.Email,usuario.Senha, It.IsAny<string>(),It.IsAny<string>());
+			//_signUpController.Get(usuario.Token, usuario.Nome, usuario.Email,usuario.Senha, It.IsAny<string>(),It.IsAny<string>());
 		
 			//Assert
 			_repository.VerifyAll();

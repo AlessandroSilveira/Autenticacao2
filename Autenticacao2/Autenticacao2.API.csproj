@@ -282,6 +282,7 @@
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\RecoverPasswordController.cs" />
     <Compile Include="Controllers\RecuperarSenhaController.cs" />
+    <Compile Include="Controllers\SaveTelefonesController.cs" />
     <Compile Include="Controllers\SignUpController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

@@ -10,6 +10,7 @@ namespace Application2.Domain.Test
 	{
 		private MockRepository _repository;
 		private Mock<IEnviadorEmail> _iEnviadorEmailMock;
+		private Mock<IConfiguration> _iConfigurationMock;
 		private EnviardorDeEmail _enviardorDeEmail;
 
 		[SetUp]
@@ -17,7 +18,8 @@ namespace Application2.Domain.Test
 		{
 			_repository = new MockRepository(MockBehavior.Strict);
 			_iEnviadorEmailMock = _repository.Create<IEnviadorEmail>();
-			_enviardorDeEmail = new EnviardorDeEmail();
+			_iConfigurationMock = _repository.Create<IConfiguration>();
+			_enviardorDeEmail = new EnviardorDeEmail(_iConfigurationMock.Object);
 		}
 
 		[Test]

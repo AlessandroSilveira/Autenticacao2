@@ -1,5 +1,4 @@
-﻿
-<h2>Cadastrar Nova Senha</h2>
+﻿<h2>Cadastrar Nova Senha</h2>
 <h4>Informe a sua nova senha</h4>
 
 <table>
@@ -66,7 +65,6 @@
 						headers: {
 							"Authorization": "Bearer " + token
 						}
-
 					})
 						.done(function (data) {
 							$("#result-area").append("<p style='color:red'>" + data + "</p>");

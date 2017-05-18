@@ -111,11 +111,11 @@
 					})
 						.done(function (result) {
 
-							if (result == "E-mail já cadastrado.") {
+							if (result === "E-mail já cadastrado.") {
 								$("#result-area").append("<p style='color:red'>" + result + "</p>");
 								return false;
 							}
-							if (result ==false) {
+							if (result === false) {
 								$("#result-area").append("<p style='color:red'>Erro ao salvar dados.</p>");
 								return false;
 							}

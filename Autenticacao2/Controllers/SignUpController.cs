@@ -5,7 +5,6 @@ using Application2.Domain.Entities;
 using Application2.Domain.Interfaces.Service;
 using Autenticacao2.Infra.Data.Interfaces;
 
-
 namespace Autenticacao2.Controllers
 {
 	[RoutePrefix("api/signup")]
@@ -14,7 +13,6 @@ namespace Autenticacao2.Controllers
 		private readonly IUsuarioService _usuarioService;
 		private readonly IUnitOfWork _uokOfWork;
 		private readonly ICriptografia _criptografia;
-		
 
 		public SignUpController(IUsuarioService usuarioService, ICriptografia criptografia, IUnitOfWork uokOfWork)
 		{
@@ -22,12 +20,10 @@ namespace Autenticacao2.Controllers
 			_uokOfWork = uokOfWork;
 			_usuarioService = usuarioService;
 		}
-
-		// POST: api/SignUp
+		
 		[HttpPost]
 		[Authorize(Roles = "User")]
 		public IHttpActionResult Index(string token,string nome,string email, string senha, string ddd, List<Telefone> telefone)
-		//public IHttpActionResult Index(Usuario usuario)
 		{
 			try
 			{

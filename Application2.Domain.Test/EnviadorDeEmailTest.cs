@@ -38,6 +38,9 @@ namespace Application2.Domain.Test
 				To = "alesssandro.silveira@concrete.com"
 			};
 		
+			_iConfigurationMock.Setup(a=>a.ObterEmailFrom()).Returns(It.IsAny<string>()).Verifiable();
+			_iConfigurationMock.Setup(a=>a.ObterPasswordEmail()).Returns(It.IsAny<string>()).Verifiable();
+
 			_enviardorDeEmail.EnviarTokenPorEmail(dadosEmail);
 
 			_repository.VerifyAll();

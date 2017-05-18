@@ -57,7 +57,7 @@ namespace Autenticacao2.Test
 			//_mockUow.Setup(a=>a.Commit()).Verifiable();
 
 			//Act
-			//_signUpController.Get(usuario.Token, usuario.Nome, usuario.Email,usuario.Senha, It.IsAny<string>(),It.IsAny<string>());
+			_signUpController.Index(usuario.Token, usuario.Nome, usuario.Email,usuario.Senha, It.IsAny<string>(),It.IsAny<List<Telefone>>());
 		
 			//Assert
 			_repository.VerifyAll();

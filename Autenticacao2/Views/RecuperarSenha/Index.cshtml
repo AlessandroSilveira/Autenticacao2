@@ -6,70 +6,69 @@
 <h2>Recuperar Senha</h2>
 <h4>Insira seu email</h4>
 
-<table>
-	<tr>
-		<td>
-			E-mail:
-		</td>
-		<td>@Html.TextBox("Email")
-			<br/>
-		
-		</td>
-	</tr>
-	<tr>
-		<td colspan="2"><input type="submit" id="request-button" value="Enviar" /></td>
-	</tr>
-	<div id="result-area"></div>
-</table>
+<div class="form-horizontal">
+    <div id="result-area"></div>
+    <div class="form-group">
+        @Html.Label("E-mail", htmlAttributes: new {@class = "control-label col-md-1"})
+        <div class="col-md-10">
+            @Html.Editor("Email", new {htmlAttributes = new {@class = "form-control"}})
+            @Html.ValidationMessage("Email", "", new {@class = "text-danger"})
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-1 col-md-1">
+            <input type="button" value="Salvar" id="request-button" class="btn btn-default"/>
+        </div>
+    </div>
+
+</div>
+
+
+
 <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
 <script>
-        $(document).ready(function ()
-        {
+    $(document).ready(function () {
         var data = {
-	        grant_type: 'password'
+            grant_type: 'password'
         }
-	       
+
         $.ajax({
-			url: "http://localhost:53151/api/security/token",
-		        type: 'post',
-		        contentType: 'x-www-form-urlencoded',
-		        data: data
-	        })
-	        .done(function (data)
-	        {
-	        	$("#request-button").on('click', function () {
-	        		$("#result-area").html("");
-	        		var email = $("#Email").val();
-	        		var token = data.access_token;
+            url: "http://localhost:53151/api/security/token",
+            type: 'post',
+            contentType: 'x-www-form-urlencoded',
+            data: data
+        })
+	        .done(function (data) {
+	            $("#request-button").on('click', function () {
+	                $("#result-area").html("");
+	                var email = $("#Email").val();
+	                var token = data.access_token;
 
-	        		if (email === "" || email == null) {
-	        			$("#result-area").append("<p style='color:red'>E-mail inválido </p>");
-				        return false;
-			        }
+	                if (email === "" || email == null) {
+	                    $("#result-area").append("<p style='color:red'>E-mail inválido </p>");
+	                    return false;
+	                }
 
-			        $.ajax({
-					        url: "http://localhost:53151/api/recoverpassword?Email=" + email+"&token="+token+"",
-							type: 'post',
-					        contentType: 'application/json',
-					        headers: {
-						        "Authorization": "Bearer " + token
-					        }
+	                $.ajax({
+	                    url: "http://localhost:53151/api/recoverpassword?Email=" + email + "&token=" + token + "",
+	                    type: 'post',
+	                    contentType: 'application/json',
+	                    headers: {
+	                        "Authorization": "Bearer " + token
+	                    }
+	                })
+				        .done(function (data) {
+				            $("#result-area").append("<p style='color:red'>" + data + "</p>");
 				        })
-				        .done(function (data)
-				        {
-					        $("#result-area").append("<p style='color:red'>"+data+"</p>");
-				        })
-				        .error(function (error)
-				        {
-				        	$("#result-area").append("<p style='color:red'>" + error + "</p>");
+				        .error(function (error) {
+				            $("#result-area").append("<p style='color:red'>" + error + "</p>");
 				        });
-			        return false;
-		        });
+	                return false;
+	            });
 	        })
-	        .error(function ()
-	        {
-	        	$("#result-area").append("<p style='color:red'>Email inválidos</p>");
-			});
-        });
+	        .error(function () {
+	            $("#result-area").append("<p style='color:red'>Email inválidos</p>");
+	        });
+    });
 </script>
 

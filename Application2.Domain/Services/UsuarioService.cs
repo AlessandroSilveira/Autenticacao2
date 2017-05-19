@@ -90,7 +90,6 @@ namespace Application2.Domain.Services
 			if (usuario.Token == null) return false;
 			usuario.Token = token;
 			AutalizarToken(usuario);
-			
 			return true;
 		}
 

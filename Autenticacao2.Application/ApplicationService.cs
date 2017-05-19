@@ -10,12 +10,10 @@ namespace Autenticacao2.Application
 		{
 			_unitOfWork = unitOfWork;
 		}
-
 		public void BeginTansaction()
 		{
 			_unitOfWork.BeginTransaction();
 		}
-
 		public void Commit()
 		{
 			_unitOfWork.Commit();

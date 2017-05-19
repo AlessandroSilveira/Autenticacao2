@@ -9,7 +9,6 @@ namespace Application2.Domain.Services
 		{
 			return retorno;
 		}
-
 		public IItensValidacao Proximo { get; set; }
 	}
 }

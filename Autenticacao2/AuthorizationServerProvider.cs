@@ -7,43 +7,36 @@ using Microsoft.Owin.Security.OAuth;
 
 namespace Autenticacao2
 {
-	public class AuthorizationServerProvider : OAuthAuthorizationServerProvider
-	{
-		public override async Task ValidateClientAuthentication(OAuthValidateClientAuthenticationContext context)
-		{
-			context.Validated();
-		}
+    public class AuthorizationServerProvider : OAuthAuthorizationServerProvider
+    {
+        public override async Task ValidateClientAuthentication(OAuthValidateClientAuthenticationContext context)
+        {
+            context.Validated();
+        }
 
-		public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
-		{
-			context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { "*" });
+        public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
+        {
+            context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] {"*"});
 
-			try
-			{
-				
+            try
+            {
+                var identity = new ClaimsIdentity(context.Options.AuthenticationType);
+                var roles = new List<string>();
 
-				var identity = new ClaimsIdentity(context.Options.AuthenticationType);
+                roles.Add("User");
 
-				//identity.AddClaim(new Claim(ClaimTypes.Name, user));
+                foreach (var role in roles)
+                    identity.AddClaim(new Claim(ClaimTypes.Role, role));
 
-				var roles = new List<string>();
-				//roles.Add("Admin");
-				roles.Add("User");
+                var principal = new GenericPrincipal(identity, roles.ToArray());
+                Thread.CurrentPrincipal = principal;
 
-				foreach (var role in roles)
-				{
-					identity.AddClaim(new Claim(ClaimTypes.Role, role));
-				}
-
-				GenericPrincipal principal = new GenericPrincipal(identity, roles.ToArray());
-				Thread.CurrentPrincipal = principal;
-
-				context.Validated(identity);
-			}
-			catch
-			{
-				context.SetError("invalid_grant", "Falha ao autenticar");
-			}
-		}
-	}
+                context.Validated(identity);
+            }
+            catch
+            {
+                context.SetError("invalid_grant", "Falha ao autenticar");
+            }
+        }
+    }
 }

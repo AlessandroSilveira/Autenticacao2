@@ -24,7 +24,6 @@ namespace Autenticacao2.Controllers
 
 			var validatoken = _usuarioService.ValidarToken(token, id);
 
-
 			return validatoken == ""
 				? (usuario == null
 					? Ok("Usuário Inválido")

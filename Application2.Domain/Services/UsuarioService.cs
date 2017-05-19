@@ -87,12 +87,10 @@ namespace Application2.Domain.Services
 		public bool Autenticar(string loginEmail, string hash, string token)
 		{
 			var usuario = _usuarioRepository.Get(f => f.Email.Equals(loginEmail) && f.Senha.Equals(hash));
-			if (usuario == null) return false;
+			if (usuario.Token == null) return false;
 			usuario.Token = token;
 			AutalizarToken(usuario);
-			if (string.IsNullOrEmpty(token))
-				return false;
-			FormsAuthentication.SetAuthCookie(token, false);
+			
 			return true;
 		}
 
@@ -124,13 +122,13 @@ namespace Application2.Domain.Services
 				_usuarioRepository.Atualizar(usuario2);
 				return true;
 			}
-			catch (Exception)
+			catch (Exception ex)
 			{
 				return false;
 			}
 		}
 
-		private Usuario CriarSenhaHash(string id, string senha)
+		public Usuario CriarSenhaHash(string id, string senha)
 		{
 			var usuario = _usuarioRepository.ObterPorId(new Guid(id));
 			usuario.Senha = _criptografia.Hash(senha);

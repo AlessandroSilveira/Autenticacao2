@@ -56,7 +56,6 @@ namespace Autenticacao2
 			kernel.Bind<ITelefoneService>().To<TelefoneService>();
 			kernel.Bind<ITelefoneRepository>().To<TelefoneRepository>();
 			kernel.Bind<ICriptografia>().To<Criptografia>();
-			kernel.Bind<IJwt>().To<Jwt>().InRequestScope();
 			kernel.Bind<IConfiguration>().To<Configuration>();
 			kernel.Bind<ICustomMessage>().To<CustomMessage>();
 			kernel.Bind<IEmailBuilder>().To<EmailBuilder>();

@@ -67,9 +67,9 @@
 
 							})
 								.done(function (result) {
-
 									if (result === "E-mail informado é inválido.") {
-										$("#result-area").append("<p style='color:red'>Informe a senha</p>");
+									    $("#result-area").append("<p style='color:red'>E-mail ou senha informado é inválido.</p>");
+									    return false;
 									}
 
 									window.location.href = "http://localhost:53151/Perfil/Index?id=" + result.usuarioId;

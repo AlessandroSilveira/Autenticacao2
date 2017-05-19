@@ -74,9 +74,9 @@ namespace Autenticacao2.Application
 			return _usuarioService.ValidarToken(token, id);
 		}
 
-		public object Get(Func<object, object> func)
+		public object Get(Func<Usuario, bool> func)
 		{
-			throw new NotImplementedException();
+		    return _usuarioService.Get(func);
 		}
 
 		public void Criar(Usuario novoUsuario)

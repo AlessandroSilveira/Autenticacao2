@@ -7,7 +7,7 @@ namespace Autenticacao2.Infra.Security
 {
 	public class Criptografia : ICriptografia
 	{
-		public static string Hash(string senha)
+		public  string Hash(string senha)
 		{
 			var bytes = new UTF8Encoding().GetBytes(senha);
 			byte[] hashBytes;
@@ -17,11 +17,6 @@ namespace Autenticacao2.Infra.Security
 			}
 
 			return Convert.ToBase64String(hashBytes);
-		}
-
-		string ICriptografia.Hash(string senha)
-		{
-			return Hash(senha);
 		}
 	}
 }

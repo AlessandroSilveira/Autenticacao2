@@ -61,7 +61,7 @@ namespace Application2.Domain.Test
 		}
 
 		[Test]
-		public void GetBodyEmailRecuperarSenha()
+		public void GetBodyEmailRecuperarSenhaTest()
 		{
 			//Act
 			_configuration.GetBodyEmailRecuperarSenha(It.IsAny<string>(), It.IsAny<string>());
@@ -69,5 +69,15 @@ namespace Application2.Domain.Test
 			//Assert
 			_repository.VerifyAll();
 		}
-	}
+
+        [Test]
+        public void ObterPasswordEmailTest()
+        {
+            //Act
+            _configuration.ObterPasswordEmail();
+
+            //Assert
+            _repository.VerifyAll();
+        }
+    }
 }

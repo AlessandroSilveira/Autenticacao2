@@ -24,8 +24,9 @@ namespace Application2.Domain.Services
 				var client = new SmtpClient(dadosEmail.SmtpServer)
 				{
 					UseDefaultCredentials = false,
-					Credentials = new NetworkCredential(_configuration.ObterEmailFrom(), _configuration.ObterPasswordEmail()),
-					EnableSsl = true
+                    //Credentials = new NetworkCredential(_configuration.ObterEmailFrom(), _configuration.ObterPasswordEmail()),
+                    Credentials = new NetworkCredential("alesilver.si@gmail.com","Alesilver224482"),
+                    EnableSsl = true
 				};
 				client.Send(message);
 			}

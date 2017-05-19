@@ -109,5 +109,5 @@ namespace Application2.Domain.Test
 			//Assert
 			_repository.VerifyAll();
 		}
-	}
+    }
 }

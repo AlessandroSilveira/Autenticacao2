@@ -19,6 +19,7 @@ namespace Application2.Domain.Services
 			Builder.BuildBcc("");
 			Builder.BuildBody(_configuration.GetBodyEmailRecuperarSenha(token, usuario.UsuarioId.ToString()));
 			Builder.BuildCc("");
+		    Builder.BuildSubject("");
 			Builder.BuildFrom(_configuration.ObterEmailFrom());
 			Builder.BuildPort(_configuration.ObterPortaServidorEmail());
 			Builder.BuildSmtpServer(_configuration.ObterSmtp());

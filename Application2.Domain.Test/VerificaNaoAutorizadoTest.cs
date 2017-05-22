@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using Application2.Domain.Entities;
-using Application2.Domain.Interfaces.Service;
+﻿using Application2.Domain.Interfaces.Service;
 using Application2.Domain.Services;
 using Moq;
 using NUnit.Framework;
 
 namespace Application2.Domain.Test
 {
-	[TestFixture]
+    [TestFixture]
 	public class VerificaNaoAutorizadoTest
 	{
 		private MockRepository _repository;
@@ -35,6 +32,5 @@ namespace Application2.Domain.Test
 			//Arrange
 			_repository.VerifyAll();
 		}
-
 	}
 }

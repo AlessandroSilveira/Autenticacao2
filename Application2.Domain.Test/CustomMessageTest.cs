@@ -2,20 +2,18 @@
 using System.Threading;
 using System.Web.Http;
 using Application2.Domain.Interfaces.Service;
-using Autenticacao2.Domain.Services;
 using Moq;
 using NUnit.Framework;
 
 namespace Application2.Domain.Test
 {
-	[TestFixture]
+    [TestFixture]
 	public class CustomMessageTest
 	{
 		private MockRepository _repository;
 		private Mock<ICustomMessage> _iCustomMessageMock;
 		private Mock<IHttpActionResult> _iHttpActionMock;
 		private CustomMessage _customMessage;
-
 
 		[SetUp]
 		public void Setup()
@@ -45,6 +43,5 @@ namespace Application2.Domain.Test
 			//Assert
 			_repository.VerifyAll();
 		}
-
 	}
 }

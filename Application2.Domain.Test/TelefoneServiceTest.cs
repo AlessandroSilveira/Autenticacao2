@@ -2,14 +2,13 @@
 using System.Collections.Generic;
 using Application2.Domain.Entities;
 using Application2.Domain.Interfaces.Repository;
-using Application2.Domain.Interfaces.Service;
 using Application2.Domain.Services;
 using Moq;
 using NUnit.Framework;
 
 namespace Application2.Domain.Test
 {
-	[TestFixture]
+    [TestFixture]
 	public class TelefoneServiceTest
 	{
 		private MockRepository _repository;
@@ -23,7 +22,6 @@ namespace Application2.Domain.Test
 			_telefoneRepositoryMock = _repository.Create<ITelefoneRepository>();
 			_telefoneServicer = new TelefoneService(_telefoneRepositoryMock.Object);
 		}
-
 
 		[Test]
 		public void DisposeTest()
@@ -52,7 +50,6 @@ namespace Application2.Domain.Test
 
 			//Assert
 			_repository.VerifyAll();
-
 		}
 
 		[Test]

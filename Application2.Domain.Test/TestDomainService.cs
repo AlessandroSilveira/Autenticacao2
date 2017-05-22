@@ -30,7 +30,7 @@ namespace Application2.Domain.Test
             _mockGerenciadorEmail = _repository.Create<IGerenciadorEmail>();
             _enviadoremailMock = _repository.Create<IEnviadorEmail>();
             _usuarioService = new UsuarioService(_mockUsuarioRepository.Object, _mockCriptografia.Object,
-                _mockGerenciadorEmail.Object, _enviadoremailMock.Object);
+            _mockGerenciadorEmail.Object, _enviadoremailMock.Object);
         }
 
         [Test]

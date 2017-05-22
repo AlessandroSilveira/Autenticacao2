@@ -3,7 +3,7 @@ using Autenticacao2.Infra.Security;
 using Moq;
 using NUnit.Framework;
 
-namespace Application2.Infra.Test
+namespace Application2.Infra.Test.Infra.Security.Test
 {
     [TestFixture]
     public class CriptografiaTest

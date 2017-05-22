@@ -23,7 +23,6 @@ namespace Autenticacao2.Application.Test
             _iUsuarioServiceMock = _repository.Create<IUsuarioService>();
             _uoWMock = _repository.Create<IUnitOfWork>();
             _usuarioAppService = new UsuarioAppService(_iUsuarioServiceMock.Object, _uoWMock.Object);
-           
         }
 
         [Test]

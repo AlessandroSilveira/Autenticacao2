@@ -15,7 +15,6 @@ namespace Autenticacao2.Test
 			_novoUsuarioController = new NovoUsuarioController();
 		}
 
-
 		[Test]
 		public void HomeTest()
 		{

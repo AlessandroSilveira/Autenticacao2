@@ -15,11 +15,9 @@ namespace Autenticacao2.Test
 			_logonController = new LogonController();
 		}
 
-
 		[Test]
 		public void HomeTest()
 		{
-
 			var result = _logonController.Index() as ViewResult;
 			Assert.AreEqual("Index", result.ViewName);
 		}

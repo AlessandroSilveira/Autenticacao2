@@ -36,7 +36,6 @@
     <Compile Include="EnviadorDeEmailTest.cs" />
     <Compile Include="GerenciadorEmailTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RepositoryTest.cs" />
     <Compile Include="RetornoValidacaoTest.cs" />
     <Compile Include="TelefoneServiceTest.cs" />
     <Compile Include="TestDomainService.cs" />

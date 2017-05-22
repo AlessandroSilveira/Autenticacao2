@@ -16,7 +16,6 @@ namespace Autenticacao2.Test
 			_cadastroController = new CadastrarNovaSenhaController();
 		}
 
-
 		[Test]
 		public void IndexTest()
 		{

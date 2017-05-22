@@ -16,7 +16,6 @@ namespace Autenticacao2.Test
 			_perfilController = new PerfilController();
 		}
 
-
 		[Test]
 		public void HomeTest()
 		{
